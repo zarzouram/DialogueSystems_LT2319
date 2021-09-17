@@ -1,0 +1,65 @@
+U. <greet>Hello</greet>/
+   <request:find>search for a <field>keyword</field> /pause/
+      <keyword>human annotated dataset</keyword></<request>
+
+S. <greet>Hello</greet>/
+   <turn_keep>let me check</turn_keep> /
+   <fail:find>Sorry I cannot find a </item_type>paper</item_type> that
+      have a keyword<keyword>human annotated dataset</keyword></fail>
+
+U. <feedback: ne>Strange</feedback> /
+   <request:list_papers_folder>what items do you have under r
+       /pause/ <folder>datasets</folder>folder</request>
+
+S. <ans:list_papers_folder>Under the dataset I have /pause/
+     <list_papers>
+        <paper:title>wizard of Wikipedia knowledge powered conversational
+           agents</paper>
+        <pause>/pause/</pause>
+        <paper:title>introducing man tls a novel domain information
+           seeking dialoguesdataset</paper>
+        <pause>/pause/</pause>
+        <paper:title>dia two</paper>
+        <pause>/pause/</pause>
+        <paper:title>IREM_TITLE</paper>
+     </list_papers>
+   </ans>                                           \
+
+U. <user_intercept>just one moment</user_intercept>
+
+S. <feedback:pos>yes</feedback>
+
+U. <kepp_turn>let me check</kepp_turn><pause>/pause/</pause>
+
+S. <feedback:pos>Ok</feedback>
+
+U. <request:change>ok so <change:from>the dia 2</change>
+      item / can you change <field>the title</field> to
+      <change:to>human annotated dialogues dataset for natural
+      conversational agents</change></request>
+
+S. <ans: change>Ok <change:from>dia two's</change>
+      <field>>title</field>> is changed to
+      <change:to>human annotated dialogues dataset for natural
+      conversational agents</change></ans>
+   <ask:goal>do you want to change anything else</ask>
+
+U. <request:query>Yes [change theee] what is <field>the document
+      type</field></request>
+
+S. <ans:query>journal article</ans>
+
+U. <confirmation>ok ok [so aah]</confirmation>
+   <request:keep>keep it</request> /
+   <request:count>[so can you tell] [how how so] do you have
+      authors how many <field>authers</field> do you
+      have</request>
+
+S. <ans:count>I have <count>four</count> <field>authors</field>
+      </ans>
+
+U. <feedback:pos>okey / good thank you</feedback>
+
+S. <ask:goal>do you need anything else</ask>
+
+U. <feedback:neg>No thank you</feedback>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<domain name="TimeDomain" is_super_domain="true">
+  <goal type="perform" action="top">
+    <plan>
+      <forget_all/>
+      <findout type="alt_question">
+        <alt>
+          <resolve type="wh_question" predicate="current_time"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="current_alarm"/>
+        </alt>
+        <alt>
+          <perform action="set_time"/>
+        </alt>
+        <alt>
+          <perform action="set_alarm"/>
+        </alt>
+      </findout>
+    </plan>
+  </goal>
+
+  <goal type="perform" action="set_time">
+    <plan>
+      <findout type="wh_question" predicate="hour_to_set"/>
+      <findout type="wh_question" predicate="minute_to_set"/>
+      <invoke_service_action name="SetTime" postconfirm="true"/>
+    </plan>
+  </goal>
+
+  <goal type="perform" action="set_alarm">
+    <plan>
+      <findout type="wh_question" predicate="selected_alarm_time"/>
+      <invoke_service_action name="SetAlarm" postconfirm="true"/>
+    </plan>
+  </goal>
+
+  <!--This element indicates the there is a defined service query related to the predicate "selected_alarm_time".
+  It potentially outputs possible answers to the system question related to that predicate
+  "what time do you want to set your alarm to? If the query returns only one result, the system will accommodate it
+  and not ask the user"-->
+  <parameters question_type="wh_question" predicate="selected_alarm_time" source="service"
+              incremental="true" sort_order="alphabetic" max_spoken_alts="3">
+  </parameters>
+
+  <goal type="resolve" question_type="wh_question" predicate="current_time">
+    <plan>
+      <invoke_service_query predicate="current_time" type="wh_question"/>
+    </plan>
+  </goal>
+
+  <goal type="resolve" question_type="wh_question" predicate="current_alarm">
+    <plan>
+      <invoke_service_query predicate="current_alarm" type="wh_question"/>
+    </plan>
+  </goal>
+</domain>

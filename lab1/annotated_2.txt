@@ -1,0 +1,37 @@
+U. <greet>Hello</greet> / <request:find>aah please find <item_type>the
+      paper</item> that have the <field>keyword</field>
+      <keyword>compositionality</keyword><keyword>
+
+S. <turn_keep>Just a moment let me check</turn_keep> / <ans:find>yes
+      I found <count>two</count> <item_type>papers</item_type>
+      <list_papers>
+        <paper:title>the first one is compositionality decomposed how
+           do neural networks generalise</paper>
+        <pause>/pause/</pause>
+        <paper:title>the second one is on the realizationof
+           compositionality in neural  networks</paper>
+        <pause>/pause/</pause>
+        <paper:title>dia two</paper>
+        <pause>/pause/</pause>
+        <paper:title>IREM_TITLE</paper>
+     </list_papers>
+   </ans>
+
+U. <request:query>What is <field>the name of the
+      <list_pos>first</list_pos> <field>author</field> of the
+      <list_pos>first</list_pos> <item>paper</item></request>
+
+S. <ans>The <fields>author name</field> is Hupkes Dieuwke</ans>
+
+U. <request:find>OK / so we have any <item>thesis</item> for
+      the same <field>author</field></request>
+
+S. <ans>Yes / we have a <item>thesis</item> <field:title>titled
+      hierarchy and interpretability in neural models of language
+      processing</field></ans>
+
+U. <feedback:pos>Yes OK thank you</feedback>
+
+S. <ask:goal>do you need anything else</ask>
+
+U. <feedback:neg>thank you</neg>

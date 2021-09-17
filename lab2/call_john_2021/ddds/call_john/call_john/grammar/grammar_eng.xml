@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar>
+  <action name="top">
+    <one-of>
+      <item>main menu</item>
+      <item>top</item>
+      <item>beginning</item>
+      <item>cancel</item>
+      <item>forget it</item>
+      <item>never mind</item>
+      <item>abort</item>
+    </one-of>
+  </action>
+
+  <action name="up">
+    <one-of>
+      <item>up</item>
+      <item>back</item>
+      <item>go back</item>
+    </one-of>
+  </action>
+
+  <action name="call">
+    <one-of>
+      <item>call</item>
+      <item>make a call</item>
+      <item>I want to call</item>
+      <item>call <slot predicate="selected_contact"/></item>
+      <item>call <slot predicate="selected_contact"/> <slot predicate="phone_type"/></item>
+    </one-of>
+  </action>
+
+  <question speaker="user" predicate="contact_number" type="wh_question">
+    <one-of>
+      <item>I want to know a contact's number</item>
+      <item>search for a contact number</item>
+      <item>what is <slot predicate="selected_contact"/> <slot
+      predicate="phone_type"/> number</item>
+      <item>what is <slot predicate="selected_contact"/> <slot
+        predicate="phone_type"/></item>
+      <item>what is <slot predicate="selected_contact"/> number</item>
+    </one-of>
+  </question>
+
+  <question speaker="system" predicate="selected_contact" type="wh_question">
+    which contact
+  </question>
+
+  <question speaker="system" predicate="phone_type" type="wh_question">
+    which phone
+  </question>
+
+  <question speaker="all" predicate="contact_number" type="wh_question">
+    the contact's phone number
+  </question>
+
+  <report action="Call" status="ended">
+    Calling <slot predicate="selected_contact"/>'s <slot predicate="phone_type"/>
+  </report>
+
+  <answer speaker="system" predicate="contact_number">
+    It's <slot predicate="contact_number"/>
+  </answer>
+
+  <individual name="contact_john">
+    <one-of>
+      <item>John</item>
+      <item>John's</item>
+      <item>john</item>
+    </one-of>
+  </individual>
+
+  <individual name="contact_mary">
+    <one-of>
+      <item>Mary</item>
+      <item>Mary's</item>
+      <item>mary</item>
+    </one-of>
+  </individual>
+
+  <individual name="mobile">
+    <one-of>
+      <item>mobile</item>
+      <item>mobile phone</item>
+      <item>cell</item>
+    </one-of>
+  </individual>
+
+  <individual name="work">
+    <one-of>
+      <item>work</item>
+      <item>work phone</item>
+    </one-of>
+  </individual>
+
+  <individual name="home">
+    <one-of>
+      <item>home</item>
+      <item>home phone</item>
+    </one-of>
+  </individual>
+
+
+</grammar>

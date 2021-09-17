@@ -1,0 +1,32 @@
+U. Hello / search for a keyword /pause/ human annotated dataset
+
+S. Hello / searching / cannot find your request
+
+U. Strange / what items do you have under r /pause/ datasets folder
+
+S. I have conference paper wizard of Wikipedia /pause/ knowledge
+S. powered conversational agents / journal article introducing man
+S. tls a novel multi domain information seeking dialogues dataset /
+S. a journal article dia two / a web page
+
+U. just one moment
+
+S. /pause/ yes
+
+U. let me check /pause/ ok so the dia 2 item / can you change the
+U. title to human annotated dialogues dataset for natural
+U. conversational  agents
+
+S. Ok dia two title changed to human annotated dialogues dataset for
+S. natural conversational agents / do you want to change anything else
+
+U. Yes [change theee] / what is the document type again
+
+S. journal article
+
+U. ok ok [so] aah keep it /m [so can you tell] [how how] so do you
+U. have authors how many authers do you have
+
+S. I have /pause/ four authors
+
+U. okey /pause/ good thank you

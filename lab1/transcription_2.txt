@@ -1,0 +1,21 @@
+ U. Hello / aah please find the paper that have the key word compositionality
+
+ S. Just a moment / let me check / aah yes I found two papers the first
+ S. one  is compositionality decomposed how do neural networks generalise
+ S. / the second one is on the realization of compositionality in neural
+ S. networks both are journal articles
+
+ U. What is the name of the first author of the first paper
+
+ S. aah Hupkes [Hupkes] Dieuwke
+
+ U. OK / so we have any thesis for the same author
+
+ S. Yes / we have thesis titled hierarchy and interpretability in neural
+ S. models of language processing
+
+ U. Yes OK thank you
+
+ S. do you need anything else
+
+ U. thank you
