@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar>
+
+  <action name="top">
+    <one-of>
+      <item>main menu</item>
+      <item>top</item>
+      <item>beginning</item>
+      <item>cancel</item>
+      <item>forget it</item>
+      <item>never mind</item>
+      <item>abort</item>
+    </one-of>
+  </action>
+
+  <action name="up">
+    <one-of>
+      <item>up</item>
+      <item>back</item>
+      <item>go back</item>
+    </one-of>
+  </action>
+
+  <!-- System's questions -->
+
+  <question speaker="system" predicate="city" type="wh_question">
+    What city
+  </question>
+
+  <question speaker="system" predicate="country" type="wh_question">
+    What country
+  </question>
+
+  <question speaker="system" predicate="unit" type="wh_question">
+    What unit
+  </question>
+
+  <!-- questions all -->
+
+  <question speaker="all" predicate="temp">
+    the temperature
+  </question>
+
+  <question speaker="all" predicate="weather">
+    the current weather
+  </question>
+
+  <!-- User's questions -->
+
+  <question speaker="user" predicate="temp" type="wh_question">
+    <one-of>
+      <item>What is the temperature</item>
+      <item>What is the temperature in <slot predicate="unit"/></item>
+      <item>What is the temperature today</item>
+      <item>What is the temperature in <slot predicate="city"/></item>
+      <item>
+        What is the temperature in <slot predicate="city"/> in <slot predicate="unit"/>
+      </item>
+      <item>
+        What is the temperature in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+
+      <item>Pleae tell me what is the temperature today</item>
+      <item>Pleae tell me what is the current temperature</item>
+
+      <item>I would like to know what is the current temperature</item>
+      <item>I would like to know the temperature</item>
+      <item>
+        I would like to know the temperature in <slot predicate="city"/>
+      </item>
+      <item>
+        I would like to know the temperature in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+
+      <item>I need to know the current temperature</item>
+      <item>I need to know the temperature in <slot predicate="city"/></item>
+      <item>
+        I need to know the temperature in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+
+      <item>temperature</item>
+      <item>temperature in <slot predicate="city"/></item>
+      <item>temperature in <slot predicate="unit"/></item>
+      <item>
+        temperature in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>temperature please</item>
+      <item>temperature today please</item>
+      <item>today temperature</item>
+
+      <item>
+        Please tell me what is the current temperature in <slot predicate="city"/>
+      </item>
+      <item>
+        Please tell me what is the current temperature in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+    </one-of>
+  </question>
+
+  <question speaker="user" predicate="weather" type="wh_question">
+    <one-of>
+      <item>What is the weather</item>
+      <item>What is the weather today</item>
+      <item>Pleae tell me what is the weather today</item>
+      <item>Pleae tell me what is the current weather</item>
+      <item>I would like to know what is the current weather</item>
+      <item>I would like to know the weather</item>
+      <item>
+        I would like to know the weather in <slot predicate="city"/>
+      </item>
+      <item>
+        I would like to know the weather foecast in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>What is the weather in <slot predicate="city"/></item>
+      <item>I need to know the current weather forecast</item>
+      <item>
+        I need to know the weather forecast in <slot predicate="city"/>
+      </item>
+      <item>
+        I need to know the weather in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>weather</item>
+      <item>weather forecast today</item>
+      <item>weather in <slot predicate="city"/></item>
+      <item>
+        weather in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>the weather please</item>
+      <item>weather forecast today please</item>
+      <item>
+        Please tell me what is the current weather in <slot predicate="city"/>
+      </item>
+      <item>
+        Please tell me what is the current weather in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>
+        What is the weather in <slot predicate="city"/>, <slot predicate="country"/>?
+      </item>
+      <item>
+        What is the weather in <slot predicate="city"/>
+      </item>
+      <item>What's the weather expected</item>
+      <item>What's the weather expected in <slot predicate="city"/></item>
+    </one-of>
+  </question>
+
+  <!-- System's answers -->
+
+  <answer speaker="system" predicate="temp">
+    The temperature is <slot predicate="temp"/>
+  </answer>
+
+  <answer speaker="system" predicate="weather">
+    It is <slot predicate="weather"/>
+  </answer>
+
+  <!-- individuals -->
+
+  <individual name="london">
+    <one-of>
+      <item>London</item>
+      <item>london</item>
+    </one-of>
+  </individual>
+
+  <individual name="gb">
+    <one-of>
+      <item>UK</item>
+      <item>U.K.</item>
+      <item>uk</item>
+      <item>u.k.</item>
+      <item>bretain</item>
+      <item>britain</item>
+      <item>Britain</item>
+    </one-of>
+  </individual>
+
+  <individual name="cairo">
+    <one-of>
+      <item>Cairo</item>
+      <item>cairo</item>
+    </one-of>
+  </individual>
+
+  <individual name="eg">
+    <one-of>
+      <item>Egypt</item>
+      <item>egypt</item>
+      <item>egpyt</item>
+      <item>eg</item>
+    </one-of>
+  </individual>
+
+  <individual name="gothenburg">
+    <one-of>
+      <item>gothenburg</item>
+      <item>Gothenburg</item>
+    </one-of>
+  </individual>
+
+  <individual name="se">
+    <one-of>
+      <item>sweden</item>
+      <item>Sweden</item>
+      <item>Swden</item>
+      <item>se</item>
+    </one-of>
+  </individual>
+
+  <individual name="newyork">
+    <one-of>
+      <item>ny</item>
+      <item>newyork</item>
+      <item>New York</item>
+      <item>new york</item>
+      <item>new+york</item>
+    </one-of>
+  </individual>
+
+  <individual name="us">
+    <one-of>
+      <item>usa</item>
+      <item>u.s.</item>
+      <item>USA</item>
+      <item>U.S.A.</item>
+      <item>united states</item>
+      <item>united states of america</item>
+      <item>America</item>
+      <item>us</item>
+    </one-of>
+  </individual>
+
+  <individual name="seoul">
+    <one-of>
+      <item>seoul</item>
+      <item>Seoul</item>
+    </one-of>
+  </individual>
+
+  <individual name="kr">
+    <one-of>
+      <item>sk</item>
+      <item>South Korea</item>
+      <item>kr</item>
+    </one-of>
+  </individual>
+
+  <individual name="metric">
+    <one-of>
+      <item>Celsius</item>
+      <item>metric unit</item>
+      <item>C</item>
+      <item>degree C</item>
+      <item>celsius</item>
+      <item>metric</item>
+    </one-of>
+  </individual>
+
+  <individual name="imperical">
+    <one-of>
+      <item>imperical unit</item>
+      <item>F</item>
+      <item>degree F</item>
+      <item>fahrenheit</item>
+      <item>Fahrenheit</item>
+      <item>imperical</item>
+    </one-of>
+  </individual>
+
+</grammar>

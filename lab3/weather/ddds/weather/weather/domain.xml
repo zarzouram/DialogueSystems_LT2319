@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<domain name="WeatherDomain" is_super_domain="true">
+  <goal type="perform" action="top">
+    <plan>
+      <forget_all/>
+      <!-- <findout type="goal"/> -->
+      <findout type="alt_question">
+        <alt>
+          <resolve type="wh_question" predicate="temp"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="weather"/>
+        </alt>
+    </findout>
+    </plan>
+  </goal>
+
+
+  <goal type="resolve" question_type="wh_question" predicate="temp">
+    <plan>
+      <findout type="wh_question" predicate="city"/>
+      <findout type="wh_question" predicate="country"/>
+      <bind type="wh_question" predicate="unit"/>
+      <invoke_service_query predicate="temp" type="wh_question"/>
+    </plan>
+  </goal>
+
+  <goal type="resolve" question_type="wh_question" predicate="weather">
+    <plan>
+      <findout type="wh_question" predicate="city"/>
+      <findout type="wh_question" predicate="country"/>
+      <invoke_service_query predicate="weather" type="wh_question"/>
+    </plan>
+  </goal>
+
+  <!-- <parameters question_type="wh_question" predicate="unit" source="service">
+    <service_query predicate="temp"/>
+  </parameters> -->
+
+
+
+</domain>

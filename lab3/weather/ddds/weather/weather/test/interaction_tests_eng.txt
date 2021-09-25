@@ -1,0 +1,59 @@
+--- main menu
+S> Do you want to know the temperature or know the current weather?
+U> temperature
+S> What city?
+U> London
+S> What country?
+U> UK
+S> The temperature is *
+
+--- temperature incremental with unit
+S> Do you want to know the temperature or know the current weather?
+U> What is the temperature in fahrenheit
+S> What city?
+U> London
+S> What country?
+U> UK
+S> The temperature is *
+
+--- temperature incremental with unit 2
+S> Do you want to know the temperature or know the current weather?
+U> What is the temperature in Cairo in fahrenheit
+S> What country?
+U> Egypt
+S> The temperature is *
+
+--- temperature oneshot
+S> Do you want to know the temperature or know the current weather?
+U> What is the temperature in London, UK?
+S> The temperature is *
+
+--- weather incremental
+S> Do you want to know the temperature or know the current weather?
+U> weather
+S> What city?
+U> London
+S> What country?
+U> UK
+S> It is *
+
+--- weather oneshot
+S> Do you want to know the temperature or know the current weather?
+U> What is the weather in London, UK?
+S> It is *
+
+--- temperature oneshot with thank you feedback
+S> Do you want to know the temperature or know the current weather?
+U> What is the temperature in London, UK?
+S> The temperature is *
+U> Thank you
+
+--- temperature oneshot with filler
+S> Do you want to know the temperature or know the current weather?
+U> What is the temperature in London, UK please?
+S> The temperature is *
+
+--- weather oneshot with misspliing
+S> Do you want to know the temperature or know the current weather?
+U> What is the weather in Suol, South Korea?
+S> It is *

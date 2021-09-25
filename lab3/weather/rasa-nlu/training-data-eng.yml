@@ -1,0 +1,735 @@
+version: "2.0"
+
+nlu:
+- intent: weather:question::temp
+  examples: |
+    - What is the temperature
+    - What is the temperature in [C](weather.sort.unit_type)
+    - What is the temperature in [Celsius](weather.sort.unit_type)
+    - What is the temperature in [F](weather.sort.unit_type)
+    - What is the temperature in [celsius](weather.sort.unit_type)
+    - What is the temperature in [degree C](weather.sort.unit_type)
+    - What is the temperature in [degree F](weather.sort.unit_type)
+    - What is the temperature in [imperical unit](weather.sort.unit_type)
+    - What is the temperature in [imperical](weather.sort.unit_type)
+    - What is the temperature in [metric unit](weather.sort.unit_type)
+    - What is the temperature in [metric](weather.sort.unit_type)
+    - What is the temperature today
+    - What is the temperature in [Cairo](weather.sort.city_type)
+    - What is the temperature in [Gothenburg](weather.sort.city_type)
+    - What is the temperature in [New York](weather.sort.city_type)
+    - What is the temperature in [Seoul](weather.sort.city_type)
+    - What is the temperature in [cairo](weather.sort.city_type)
+    - What is the temperature in [gothenburg](weather.sort.city_type)
+    - What is the temperature in [new york](weather.sort.city_type)
+    - What is the temperature in [newyork](weather.sort.city_type)
+    - What is the temperature in [ny](weather.sort.city_type)
+    - What is the temperature in [seoul](weather.sort.city_type)
+    - What is the temperature in [Gothenburg](weather.sort.city_type) in [metric](weather.sort.unit_type)
+    - What is the temperature in [London](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [New York](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [Seoul](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [gothenburg](weather.sort.city_type) in [metric](weather.sort.unit_type)
+    - What is the temperature in [london](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [new york](weather.sort.city_type) in [metric](weather.sort.unit_type)
+    - What is the temperature in [newyork](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [ny](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [seoul](weather.sort.city_type) in [imperical](weather.sort.unit_type)
+    - What is the temperature in [Gothenburg](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the temperature in [London](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - What is the temperature in [New York](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the temperature in [Seoul](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the temperature in [gothenburg](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the temperature in [london](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the temperature in [new york](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - What is the temperature in [newyork](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the temperature in [ny](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - What is the temperature in [seoul](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - Pleae tell me what is the temperature today
+    - Pleae tell me what is the current temperature
+    - I would like to know what is the current temperature
+    - I would like to know the temperature
+    - I would like to know the temperature in [Cairo](weather.sort.city_type)
+    - I would like to know the temperature in [London](weather.sort.city_type)
+    - I would like to know the temperature in [New York](weather.sort.city_type)
+    - I would like to know the temperature in [Seoul](weather.sort.city_type)
+    - I would like to know the temperature in [cairo](weather.sort.city_type)
+    - I would like to know the temperature in [london](weather.sort.city_type)
+    - I would like to know the temperature in [new york](weather.sort.city_type)
+    - I would like to know the temperature in [newyork](weather.sort.city_type)
+    - I would like to know the temperature in [ny](weather.sort.city_type)
+    - I would like to know the temperature in [seoul](weather.sort.city_type)
+    - I would like to know the temperature in [Cairo](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I would like to know the temperature in [Gothenburg](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I would like to know the temperature in [New York](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I would like to know the temperature in [Seoul](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - I would like to know the temperature in [cairo](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I would like to know the temperature in [gothenburg](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - I would like to know the temperature in [new york](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the temperature in [newyork](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the temperature in [ny](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the temperature in [seoul](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I need to know the current temperature
+    - I need to know the temperature in [Cairo](weather.sort.city_type)
+    - I need to know the temperature in [London](weather.sort.city_type)
+    - I need to know the temperature in [New York](weather.sort.city_type)
+    - I need to know the temperature in [Seoul](weather.sort.city_type)
+    - I need to know the temperature in [cairo](weather.sort.city_type)
+    - I need to know the temperature in [london](weather.sort.city_type)
+    - I need to know the temperature in [new york](weather.sort.city_type)
+    - I need to know the temperature in [newyork](weather.sort.city_type)
+    - I need to know the temperature in [ny](weather.sort.city_type)
+    - I need to know the temperature in [seoul](weather.sort.city_type)
+    - I need to know the temperature in [Gothenburg](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the temperature in [London](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I need to know the temperature in [New York](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I need to know the temperature in [Seoul](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the temperature in [gothenburg](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the temperature in [london](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I need to know the temperature in [new york](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the temperature in [newyork](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I need to know the temperature in [ny](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I need to know the temperature in [seoul](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - temperature
+    - temperature in [Cairo](weather.sort.city_type)
+    - temperature in [Gothenburg](weather.sort.city_type)
+    - temperature in [London](weather.sort.city_type)
+    - temperature in [Seoul](weather.sort.city_type)
+    - temperature in [cairo](weather.sort.city_type)
+    - temperature in [gothenburg](weather.sort.city_type)
+    - temperature in [london](weather.sort.city_type)
+    - temperature in [new york](weather.sort.city_type)
+    - temperature in [ny](weather.sort.city_type)
+    - temperature in [seoul](weather.sort.city_type)
+    - temperature in [C](weather.sort.unit_type)
+    - temperature in [Celsius](weather.sort.unit_type)
+    - temperature in [F](weather.sort.unit_type)
+    - temperature in [celsius](weather.sort.unit_type)
+    - temperature in [degree C](weather.sort.unit_type)
+    - temperature in [degree F](weather.sort.unit_type)
+    - temperature in [imperical unit](weather.sort.unit_type)
+    - temperature in [imperical](weather.sort.unit_type)
+    - temperature in [metric unit](weather.sort.unit_type)
+    - temperature in [metric](weather.sort.unit_type)
+    - temperature in [Cairo](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - temperature in [London](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - temperature in [New York](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - temperature in [Seoul](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - temperature in [cairo](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - temperature in [london](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - temperature in [new york](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - temperature in [newyork](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - temperature in [ny](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - temperature in [seoul](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - temperature please
+    - temperature today please
+    - today temperature
+    - Please tell me what is the current temperature in [Cairo](weather.sort.city_type)
+    - Please tell me what is the current temperature in [Gothenburg](weather.sort.city_type)
+    - Please tell me what is the current temperature in [New York](weather.sort.city_type)
+    - Please tell me what is the current temperature in [Seoul](weather.sort.city_type)
+    - Please tell me what is the current temperature in [cairo](weather.sort.city_type)
+    - Please tell me what is the current temperature in [gothenburg](weather.sort.city_type)
+    - Please tell me what is the current temperature in [new york](weather.sort.city_type)
+    - Please tell me what is the current temperature in [newyork](weather.sort.city_type)
+    - Please tell me what is the current temperature in [ny](weather.sort.city_type)
+    - Please tell me what is the current temperature in [seoul](weather.sort.city_type)
+    - Please tell me what is the current temperature in [Gothenburg](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [London](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [New York](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [Seoul](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [gothenburg](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [london](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [new york](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [newyork](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [ny](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - Please tell me what is the current temperature in [seoul](weather.sort.city_type), [sk](weather.sort.country_type)?
+
+- intent: weather:question::weather
+  examples: |
+    - What is the weather
+    - What is the weather today
+    - Pleae tell me what is the weather today
+    - Pleae tell me what is the current weather
+    - I would like to know what is the current weather
+    - I would like to know the weather
+    - I would like to know the weather in [Cairo](weather.sort.city_type)
+    - I would like to know the weather in [Gothenburg](weather.sort.city_type)
+    - I would like to know the weather in [New York](weather.sort.city_type)
+    - I would like to know the weather in [Seoul](weather.sort.city_type)
+    - I would like to know the weather in [cairo](weather.sort.city_type)
+    - I would like to know the weather in [gothenburg](weather.sort.city_type)
+    - I would like to know the weather in [new york](weather.sort.city_type)
+    - I would like to know the weather in [newyork](weather.sort.city_type)
+    - I would like to know the weather in [ny](weather.sort.city_type)
+    - I would like to know the weather in [seoul](weather.sort.city_type)
+    - I would like to know the weather foecast in [Cairo](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - I would like to know the weather foecast in [Gothenburg](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I would like to know the weather foecast in [New York](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the weather foecast in [Seoul](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the weather foecast in [cairo](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I would like to know the weather foecast in [gothenburg](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I would like to know the weather foecast in [new york](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the weather foecast in [newyork](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I would like to know the weather foecast in [ny](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I would like to know the weather foecast in [seoul](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the weather in [Cairo](weather.sort.city_type)
+    - What is the weather in [London](weather.sort.city_type)
+    - What is the weather in [New York](weather.sort.city_type)
+    - What is the weather in [Seoul](weather.sort.city_type)
+    - What is the weather in [cairo](weather.sort.city_type)
+    - What is the weather in [london](weather.sort.city_type)
+    - What is the weather in [new york](weather.sort.city_type)
+    - What is the weather in [newyork](weather.sort.city_type)
+    - What is the weather in [ny](weather.sort.city_type)
+    - What is the weather in [seoul](weather.sort.city_type)
+    - I need to know the current weather forecast
+    - I need to know the weather forecast in [Gothenburg](weather.sort.city_type)
+    - I need to know the weather forecast in [London](weather.sort.city_type)
+    - I need to know the weather forecast in [New York](weather.sort.city_type)
+    - I need to know the weather forecast in [Seoul](weather.sort.city_type)
+    - I need to know the weather forecast in [gothenburg](weather.sort.city_type)
+    - I need to know the weather forecast in [london](weather.sort.city_type)
+    - I need to know the weather forecast in [new york](weather.sort.city_type)
+    - I need to know the weather forecast in [newyork](weather.sort.city_type)
+    - I need to know the weather forecast in [ny](weather.sort.city_type)
+    - I need to know the weather forecast in [seoul](weather.sort.city_type)
+    - I need to know the weather in [Gothenburg](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I need to know the weather in [London](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - I need to know the weather in [New York](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the weather in [Seoul](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I need to know the weather in [gothenburg](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - I need to know the weather in [london](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - I need to know the weather in [new york](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - I need to know the weather in [newyork](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - I need to know the weather in [ny](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - I need to know the weather in [seoul](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - weather
+    - weather forecast today
+    - weather in [Gothenburg](weather.sort.city_type)
+    - weather in [London](weather.sort.city_type)
+    - weather in [New York](weather.sort.city_type)
+    - weather in [Seoul](weather.sort.city_type)
+    - weather in [gothenburg](weather.sort.city_type)
+    - weather in [london](weather.sort.city_type)
+    - weather in [new york](weather.sort.city_type)
+    - weather in [newyork](weather.sort.city_type)
+    - weather in [ny](weather.sort.city_type)
+    - weather in [seoul](weather.sort.city_type)
+    - weather in [Cairo](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - weather in [Gothenburg](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - weather in [London](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - weather in [New York](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - weather in [cairo](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - weather in [gothenburg](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - weather in [london](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - weather in [new york](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - weather in [newyork](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - weather in [ny](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - the weather please
+    - weather forecast today please
+    - Please tell me what is the current weather in [Cairo](weather.sort.city_type)
+    - Please tell me what is the current weather in [Gothenburg](weather.sort.city_type)
+    - Please tell me what is the current weather in [London](weather.sort.city_type)
+    - Please tell me what is the current weather in [Seoul](weather.sort.city_type)
+    - Please tell me what is the current weather in [cairo](weather.sort.city_type)
+    - Please tell me what is the current weather in [gothenburg](weather.sort.city_type)
+    - Please tell me what is the current weather in [london](weather.sort.city_type)
+    - Please tell me what is the current weather in [new york](weather.sort.city_type)
+    - Please tell me what is the current weather in [ny](weather.sort.city_type)
+    - Please tell me what is the current weather in [seoul](weather.sort.city_type)
+    - Please tell me what is the current weather in [Cairo](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [Gothenburg](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - Please tell me what is the current weather in [New York](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - Please tell me what is the current weather in [Seoul](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [cairo](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [gothenburg](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [new york](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - Please tell me what is the current weather in [newyork](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [ny](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - Please tell me what is the current weather in [seoul](weather.sort.city_type), [usa](weather.sort.country_type)?
+    - What is the weather in [Cairo](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the weather in [Gothenburg](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - What is the weather in [London](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the weather in [Seoul](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - What is the weather in [cairo](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the weather in [gothenburg](weather.sort.city_type), [sweden](weather.sort.country_type)?
+    - What is the weather in [london](weather.sort.city_type), [sk](weather.sort.country_type)?
+    - What is the weather in [new york](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - What is the weather in [ny](weather.sort.city_type), [UK](weather.sort.country_type)?
+    - What is the weather in [seoul](weather.sort.city_type), [Egypt](weather.sort.country_type)?
+    - What is the weather in [Cairo](weather.sort.city_type)
+    - What is the weather in [Gothenburg](weather.sort.city_type)
+    - What is the weather in [London](weather.sort.city_type)
+    - What is the weather in [Seoul](weather.sort.city_type)
+    - What is the weather in [cairo](weather.sort.city_type)
+    - What is the weather in [gothenburg](weather.sort.city_type)
+    - What is the weather in [london](weather.sort.city_type)
+    - What is the weather in [new york](weather.sort.city_type)
+    - What is the weather in [ny](weather.sort.city_type)
+    - What is the weather in [seoul](weather.sort.city_type)
+    - What's the weather expected
+    - What's the weather expected in [Cairo](weather.sort.city_type)
+    - What's the weather expected in [Gothenburg](weather.sort.city_type)
+    - What's the weather expected in [London](weather.sort.city_type)
+    - What's the weather expected in [Seoul](weather.sort.city_type)
+    - What's the weather expected in [cairo](weather.sort.city_type)
+    - What's the weather expected in [gothenburg](weather.sort.city_type)
+    - What's the weather expected in [london](weather.sort.city_type)
+    - What's the weather expected in [new york](weather.sort.city_type)
+    - What's the weather expected in [ny](weather.sort.city_type)
+    - What's the weather expected in [seoul](weather.sort.city_type)
+
+- intent: weather:answer
+  examples: |
+    - [London](weather.sort.city_type)
+    - [london](weather.sort.city_type)
+    - [Cairo](weather.sort.city_type)
+    - [cairo](weather.sort.city_type)
+    - [gothenburg](weather.sort.city_type)
+    - [Gothenburg](weather.sort.city_type)
+    - [ny](weather.sort.city_type)
+    - [new york](weather.sort.city_type)
+    - [New York](weather.sort.city_type)
+    - [newyork](weather.sort.city_type)
+    - [seoul](weather.sort.city_type)
+    - [Seoul](weather.sort.city_type)
+    - [UK](weather.sort.country_type)
+    - [U.K.](weather.sort.country_type)
+    - [uk](weather.sort.country_type)
+    - [u.k.](weather.sort.country_type)
+    - [bretain](weather.sort.country_type)
+    - [britain](weather.sort.country_type)
+    - [Britain](weather.sort.country_type)
+    - [Egypt](weather.sort.country_type)
+    - [egypt](weather.sort.country_type)
+    - [egpyt](weather.sort.country_type)
+    - [eg](weather.sort.country_type)
+    - [sweden](weather.sort.country_type)
+    - [Sweden](weather.sort.country_type)
+    - [Swden](weather.sort.country_type)
+    - [se](weather.sort.country_type)
+    - [usa](weather.sort.country_type)
+    - [us](weather.sort.country_type)
+    - [USA](weather.sort.country_type)
+    - [U.S.A.](weather.sort.country_type)
+    - [united states](weather.sort.country_type)
+    - [united states of america](weather.sort.country_type)
+    - [America](weather.sort.country_type)
+    - [america](weather.sort.country_type)
+    - [sk](weather.sort.country_type)
+    - [South Korea](weather.sort.country_type)
+    - [south korea](weather.sort.country_type)
+    - [single](weather.sort.string)
+    - [double word](weather.sort.string)
+    - [three in one](weather.sort.string)
+    - [hey make it four](weather.sort.string)
+    - [the more the merrier five](weather.sort.string)
+    - [calm down and count to six](weather.sort.string)
+    - [bring them through to the jolly seven](weather.sort.string)
+    - [noone counts toes like an eight toed guy](weather.sort.string)
+    - [it matters to make sense for nine of us](weather.sort.string)
+    - [would you bring ten or none to a desert island](weather.sort.string)
+    - [metric](weather.sort.unit_type)
+    - [metric unit](weather.sort.unit_type)
+    - [C](weather.sort.unit_type)
+    - [degree C](weather.sort.unit_type)
+    - [celsius](weather.sort.unit_type)
+    - [Celsius](weather.sort.unit_type)
+    - [imperical](weather.sort.unit_type)
+    - [imperical unit](weather.sort.unit_type)
+    - [F](weather.sort.unit_type)
+    - [degree F](weather.sort.unit_type)
+    - [fahrenheit](weather.sort.unit_type)
+    - [Fahrenheit](weather.sort.unit_type)
+    - yes [London](weather.sort.city_type)
+    - yes [seoul](weather.sort.city_type)
+    - yes [egypt](weather.sort.country_type)
+    - yes [U.S.A.](weather.sort.country_type)
+    - yes [three in one](weather.sort.string)
+    - yes [C](weather.sort.unit_type)
+    - no [london](weather.sort.city_type)
+    - no [Seoul](weather.sort.city_type)
+    - no [egpyt](weather.sort.country_type)
+    - no [united states](weather.sort.country_type)
+    - no [hey make it four](weather.sort.string)
+    - no [degree C](weather.sort.unit_type)
+
+- intent: weather:answer_negation
+  examples: |
+    - not [London](weather.sort.city_type)
+    - not [london](weather.sort.city_type)
+    - not [Cairo](weather.sort.city_type)
+    - not [cairo](weather.sort.city_type)
+    - not [gothenburg](weather.sort.city_type)
+    - not [Gothenburg](weather.sort.city_type)
+    - not [ny](weather.sort.city_type)
+    - not [new york](weather.sort.city_type)
+    - not [New York](weather.sort.city_type)
+    - not [newyork](weather.sort.city_type)
+    - not [seoul](weather.sort.city_type)
+    - not [Seoul](weather.sort.city_type)
+    - not [UK](weather.sort.country_type)
+    - not [U.K.](weather.sort.country_type)
+    - not [uk](weather.sort.country_type)
+    - not [u.k.](weather.sort.country_type)
+    - not [bretain](weather.sort.country_type)
+    - not [britain](weather.sort.country_type)
+    - not [Britain](weather.sort.country_type)
+    - not [Egypt](weather.sort.country_type)
+    - not [egypt](weather.sort.country_type)
+    - not [egpyt](weather.sort.country_type)
+    - not [eg](weather.sort.country_type)
+    - not [sweden](weather.sort.country_type)
+    - not [Sweden](weather.sort.country_type)
+    - not [Swden](weather.sort.country_type)
+    - not [se](weather.sort.country_type)
+    - not [usa](weather.sort.country_type)
+    - not [us](weather.sort.country_type)
+    - not [USA](weather.sort.country_type)
+    - not [U.S.A.](weather.sort.country_type)
+    - not [united states](weather.sort.country_type)
+    - not [united states of america](weather.sort.country_type)
+    - not [America](weather.sort.country_type)
+    - not [america](weather.sort.country_type)
+    - not [sk](weather.sort.country_type)
+    - not [South Korea](weather.sort.country_type)
+    - not [south korea](weather.sort.country_type)
+    - not [metric](weather.sort.unit_type)
+    - not [metric unit](weather.sort.unit_type)
+    - not [C](weather.sort.unit_type)
+    - not [degree C](weather.sort.unit_type)
+    - not [celsius](weather.sort.unit_type)
+    - not [Celsius](weather.sort.unit_type)
+    - not [imperical](weather.sort.unit_type)
+    - not [imperical unit](weather.sort.unit_type)
+    - not [F](weather.sort.unit_type)
+    - not [degree F](weather.sort.unit_type)
+    - not [fahrenheit](weather.sort.unit_type)
+    - not [Fahrenheit](weather.sort.unit_type)
+
+- intent: NEGATIVE
+  examples: |
+    - aboard
+    - about
+    - above
+    - across
+    - after
+    - against
+    - along
+    - among
+    - as
+    - at
+    - on
+    - atop
+    - before
+    - behind
+    - below
+    - beneath
+    - beside
+    - between
+    - beyond
+    - but
+    - by
+    - come
+    - down
+    - during
+    - except
+    - for
+    - from
+    - in
+    - inside
+    - into
+    - less
+    - like
+    - near
+    - of
+    - off
+    - on
+    - onto
+    - opposite
+    - out
+    - outside
+    - over
+    - past
+    - save
+    - short
+    - since
+    - than
+    - then
+    - through
+    - throughout
+    - to
+    - toward
+    - under
+    - underneath
+    - unlike
+    - until
+    - up
+    - upon
+    - with
+    - within
+    - without
+    - worth
+    - is
+    - it
+    - the
+    - a
+    - am
+    - are
+    - them
+    - this
+    - that
+    - I
+    - you
+    - he
+    - she
+    - they
+    - them
+    - his
+    - her
+    - my
+    - mine
+    - their
+    - your
+    - us
+    - our
+    - how
+    - how's
+    - how is
+    - how's the
+    - how is the
+    - when
+    - when's
+    - when is
+    - when is the
+    - when's the
+    - what
+    - what is
+    - what's
+    - what's the
+    - what is the
+    - why
+    - why is
+    - why's
+    - why is the
+    - why's the
+    - do
+    - make
+    - tell
+    - start
+    - stop
+    - enable
+    - disable
+    - raise
+    - lower
+    - decrease
+    - increase
+    - act
+    - determine
+    - say
+    - ask
+    - go
+    - shoot
+    - wait
+    - hang on
+    - ok
+    - show
+    - help
+
+- intent: answer:yes
+  examples: |
+    - yes
+    - yeah
+    - yep
+    - sure
+    - ok
+    - of course
+    - very well
+    - fine
+    - right
+    - excellent
+    - okay
+    - perfect
+    - I think so
+
+- intent: answer:no
+  examples: |
+    - no
+    - nope
+    - no thanks
+    - no thank you
+    - negative
+    - don't want to
+    - don't
+    - do not
+    - please don't
+
+- intent: request:top
+  examples: |
+    - forget it
+    - never mind
+    - get me out of here
+    - start over
+    - beginning
+    - never mind that
+    - restart
+
+- intent: request:up
+  examples: |
+    - go back
+    - back
+    - previous
+    - back to the previous
+    - go to the previous
+    - go back to the previous one
+
+- intent: request:how
+  examples: |
+    - how do I do that
+    - how
+    - can you tell me how to do that
+    - I don't know how should I do that
+    - how can I do that
+
+- intent: report:done
+  examples: |
+    - I'm done
+    - done
+    - ready
+    - it's ready
+    - I'm ready
+    - completed
+    - check
+    - I have finished
+    - finished
+    - done and done
+    - it's done now
+    - okay next
+    - next
+    - next instruction
+
+- intent: icm:per*neg
+  examples: |
+    - repeat
+    - repeat it
+    - repeat that
+    - pardon
+    - sorry
+    - can you repeat that
+    - excuse me
+    - what was that
+    - what did you say
+    - come again
+
+- intent: icm:acc*neg:issue
+  examples: |
+    - I don't know
+    - I don't know that
+    - it doesn't matter
+
+- intent: thanks
+  examples: |
+    - thank you
+    - thank you very much
+    - thanks
+    - big thanks
+    - thanks a lot
+
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - good day
+    - what's up
+    - good evening
+    - good morning
+    - hey
+
+- synonym: weather:city_london
+  examples: |
+    - London
+    - london
+
+- synonym: weather:city_cairo
+  examples: |
+    - Cairo
+    - cairo
+
+- synonym: weather:city_gotheburg
+  examples: |
+    - gothenburg
+    - Gothenburg
+
+- synonym: weather:city_ny
+  examples: |
+    - ny
+    - new york
+    - New York
+    - newyork
+
+- synonym: weather:city_seoul
+  examples: |
+    - seoul
+    - Seoul
+
+- synonym: weather:country_uk
+  examples: |
+    - UK
+    - U.K.
+    - uk
+    - u.k.
+    - bretain
+    - britain
+    - Britain
+
+- synonym: weather:country_egypt
+  examples: |
+    - Egypt
+    - egypt
+    - egpyt
+    - eg
+
+- synonym: weather:country_sweden
+  examples: |
+    - sweden
+    - Sweden
+    - Swden
+    - se
+
+- synonym: weather:country_usa
+  examples: |
+    - usa
+    - us
+    - USA
+    - U.S.A.
+    - united states
+    - united states of america
+    - America
+    - america
+
+- synonym: weather:country_skorea
+  examples: |
+    - sk
+    - South Korea
+    - south korea
+
+- synonym: weather:metric
+  examples: |
+    - metric
+    - metric unit
+    - C
+    - degree C
+    - celsius
+    - Celsius
+
+- synonym: weather:imperical
+  examples: |
+    - imperical
+    - imperical unit
+    - F
+    - degree F
+    - fahrenheit
+    - Fahrenheit
+
+
