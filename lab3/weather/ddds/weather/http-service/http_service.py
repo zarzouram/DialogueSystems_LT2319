@@ -25,6 +25,7 @@ def setup_logger():
 logger = setup_logger()
 app = Flask(__name__)
 environment = Environment()
+key = "092c06d04cce1d5d3b794fc85a7f6085"
 
 
 def jsonfilter(value):
@@ -176,7 +177,7 @@ def action_success_response():
 def temperature():
     payload = request.get_json()
     city = payload["context"]["facts"]["city"]["grammar_entry"]
-    country = payload["context"]["facts"]["country"]["grammar_entry"]
+    country = payload["context"]["facts"]["country"]["value"]
     unit = payload["request"]["parameters"]["unit"]
     unit = "metric" if unit is None else unit["value"]
     print_data([country])
@@ -190,7 +191,7 @@ def temperature():
 def weather():
     payload = request.get_json()
     city = payload["context"]["facts"]["city"]["grammar_entry"]
-    country = payload["context"]["facts"]["country"]["grammar_entry"]
+    country = payload["context"]["facts"]["country"]["value"]
     data = get_data(city, country)
 
     weather_ = data['weather'][0]['description']

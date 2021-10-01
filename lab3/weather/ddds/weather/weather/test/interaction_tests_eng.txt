@@ -55,5 +55,5 @@ S> The temperature is *
 
 --- weather oneshot with misspliing
 S> Do you want to know the temperature or know the current weather?
-U> What is the weather in Suol, South Korea?
+U> What is the weather in Seoul, South Korea?
 S> It is *
