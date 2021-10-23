@@ -1,0 +1,17 @@
+--- main menu
+S> What would you like to do?
+
+--- 01.01: query number of items
+S> What would you like to do?
+U> How many items do I have
+S> You have * records
+
+--- 01.02: query number of articles
+S> What would you like to do?
+U> How many journal article do I have
+S> You have * journal articles
+
+--- 01.03: query number of webpage
+S> What would you like to do?
+U> How many web page do I have
+S> You do not have any webpage

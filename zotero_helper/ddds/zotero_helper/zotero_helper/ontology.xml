@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ontology name="ZoteroHelperOntology">
+
+    <!-- ******* Actions  ******* -->
+    <!-- <action name="report_count"/>
+    <action name="report_empty"/> -->
+
+    <!-- ******* Custom sorts  *******-->
+    <sort name="record_type" dynamic="true"/>
+    <sort name="record_count" dynamic="true"/>
+    <sort name="the_count" dynamic="true"/>
+    <sort name="count_info" dynamic="true"/>
+    <sort name="query_type" dynamic="true"/>
+
+    <!-- ******* Predicates ******* -->
+    <predicate name="count" sort="count_info"/>
+    <predicate name="count_type" sort="record_count"/>
+    <predicate name="count_only" sort="the_count"/>
+    <predicate name="type" sort="record_type"/>
+    <predicate name="check_type" sort="query_type"/>
+
+    <!-- ******* Individual ******* -->
+    <!-- item type -->
+    <individual name="webpage" sort="record_type"/>
+    <individual name="conferencePaper" sort="record_type"/>
+    <individual name="journalArticle" sort="record_type"/>
+
+
+</ontology>

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<grammar>
+
+  <action name="top">
+    <one-of>
+      <item>main menu</item>
+      <item>top</item>
+      <item>beginning</item>
+      <item>cancel</item>
+      <item>forget it</item>
+      <item>never mind</item>
+      <item>abort</item>
+    </one-of>
+  </action>
+
+  <action name="up">
+    <one-of>
+      <item>up</item>
+      <item>back</item>
+      <item>go back</item>
+    </one-of>
+  </action>
+
+  <!-- ************** User Questions **************   -->
+
+  <!-- 01: Query items number p: items_num  -->
+  <question speaker="user" predicate="count" type="wh_question">
+    <one-of>
+      <item>How many items do I have</item>
+      <item>How many items do we have</item>
+      <item>how many items do you have</item>
+      <item>How many <slot predicate="type"/> do I have</item>
+      <item>how many <slot predicate="type"/> do we have</item>
+      <item>how many <slot predicate="type"/> do you have</item>
+
+      <item>how many records do you have?</item>
+      <item>how many records do we have</item>
+      <item>how many records do I have</item>
+
+      <item>so, how many items do I have</item>
+      <item>so, how many items do we have</item>
+      <item>so, how many items do you have</item>
+
+      <item>so, how many records do you have</item>
+      <item>so, how many records do we have</item>
+      <item>so, how many records do I have</item>
+
+      <item>tell me, how many items do I have</item>
+      <item>tell me, how many items do we have</item>
+      <item>tell me, how many items do you have</item>
+
+      <item>tell me, how many records do you have</item>
+      <item>tell me, how many records do we have</item>
+      <item>tell me, how many records do I have</item>
+
+      <item>can you tell me, how many items do I have</item>
+      <item>can you tell me, how many items do we have</item>
+      <item>can you tell me, how many items do you have</item>
+
+      <item>can you tell me, how many records do you have</item>
+      <item>can you tell me, how many records do we have</item>
+      <item>can you tell me, how many records do I have</item>
+
+      <item>please tell me, how many items do I have</item>
+      <item>please tell me, how many items do we have</item>
+      <item>please tell me, how many items do you have</item>
+
+      <item>please tell me, how many records do you have</item>
+      <item>please tell me, how many records do we have</item>
+      <item>please tell me, how many records do I have</item>
+
+      <item>can you please tell me, how many items do I have</item>
+      <item>can you please tell me, how many items do we have</item>
+      <item>can you please tell me, how many items do you have</item>
+
+      <item>can you please tell me, how many records do you have</item>
+      <item>can you please tell me, how many records do we have</item>
+      <item>can you please tell me, how many records do I have</item>
+
+      <item>count the items that we have</item>
+      <item>count the items that I have</item>
+      <item>count the items that you have</item>
+
+      <item>count records that we have</item>
+      <item>count records that I have</item>
+      <item>count records that you have</item>
+
+      <item>so, let us count the items that I have</item>
+      <item>so, let us count the items that you have</item>
+      <item>so, let us count the items that we have</item>
+
+      <item>so, let us count the items that I have</item>
+      <item>so, let us count the items that you have</item>
+      <item>so, let us count the items that we have</item>
+
+      <item>can you count the items that I have</item>
+      <item>can you count the items that we have</item>
+      <item>can you count the items that you have</item>
+
+      <item>can you count records that you have</item>
+      <item>can you count the records that we have</item>
+      <item>can you count records thar I have</item>
+
+      <item>can you count the items that I have for me please</item>
+      <item>can you count the items that we have for me </item>
+      <item>can you count the items that you have for me </item>
+
+      <item>can you count records that you have for me please</item>
+      <item>can you count the records that we have for me please</item>
+      <item>can you count records thar I have for me please</item>
+
+      <item>please can you count records that you have</item>
+      <item>please can you count the records that we have</item>
+      <item>please can you count records thar I have</item>
+
+      <item>would you count records that you have</item>
+      <item>would you count the records that we have</item>
+      <item>would you count records thar I have</item>
+
+      <item>would you count items that you have</item>
+      <item>would you count the items that we have</item>
+      <item>would you count items thar I have</item>
+    </one-of>
+  </question>
+
+  <!-- ************** System Questions **************  -->
+
+  <!-- **************System's answers  **************  -->
+
+  <!-- 01: Query items number p: items_num  -->
+  <!-- <answer speaker="system" predicate="count">
+    You have <slot predicate="count" type="individual"/>
+  </answer> -->
+
+  <report action="ReportCount" status="ended">
+    You have <slot predicate="count_type" type="individual"/>
+  </report>
+
+  <report action="ReportEmpty" status="ended">
+    You do not have any <slot predicate="check_type" type="individual"/>
+  </report>
+
+  <!-- ************** individuals **************  -->
+
+  <individual name="webpage">
+    <one-of>
+      <item>web page</item>
+      <item>web site</item>
+      <item>internet site</item>
+      <item>site</item>
+      <item>page</item>
+    </one-of>
+  </individual>
+
+  <individual name="conferencePaper">
+    <one-of>
+      <item>conference paper</item>
+      <item>conference</item>
+      <item>paper</item>
+    </one-of>
+  </individual>
+
+  <individual name="journalArticle">
+    <one-of>
+      <item>journal article</item>
+      <item>journal paper</item>
+      <item>journal</item>
+      <item>article</item>
+    </one-of>
+  </individual>
+
+</grammar>

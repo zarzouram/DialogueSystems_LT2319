@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service_interface>
+
+  <query name="count_type">
+    <parameters>
+      <parameter predicate="type" format="grammar_entry" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/items_count_type"/>
+    </target>
+  </query>
+
+  <query name="count_only">
+    <parameters>
+      <parameter predicate="type" format="grammar_entry" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/items_count_only"/>
+    </target>
+  </query>
+
+  <query name="check_type">
+    <parameters>
+      <parameter predicate="type" format="grammar_entry" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/check_item_type"/>
+    </target>
+  </query>
+
+  <action name="ReportEmpty">
+    <parameters>
+      <parameter predicate="type" format="grammar_entry" optional="true"/>
+      <parameter predicate="check_type" format="value" />
+    </parameters>
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/action_success_response"/>
+    </target>
+  </action>
+
+  <action name="ReportCount">
+    <parameters>
+      <parameter predicate="count_type" format="value" />
+    </parameters>
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/action_success_response"/>
+    </target>
+  </action>
+
+</service_interface>
