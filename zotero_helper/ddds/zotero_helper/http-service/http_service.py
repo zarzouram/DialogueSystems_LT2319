@@ -39,6 +39,15 @@ def jsonfilter(value):
 
 environment.filters["json"] = jsonfilter
 
+SCORE_BOARD_PATH = "dummyscoreboard.json"
+with open(SCORE_BOARD_PATH, "r") as json_file:
+    SCORE_BOARD = json.load(json_file)
+
+
+def out_score_board(score_board):
+    with open(SCORE_BOARD_PATH, "w") as json_file:
+        json.dump(score_board, json_file, indent=4)
+
 
 def error_response(message):
     response_template = environment.from_string(
@@ -163,10 +172,47 @@ def action_success_response():
    }
    """
     )
+    data2print = []
+    status = request.get_json()["request"]["parameters"]
+    for s in status:
+        data2print.append({"request": {s: [status[s]["grammar_entry"], status[s]["value"]]}})
+    status = request.get_json()["context"]["facts"]
+    for s in status:
+        data2print.append({"facts": {s: [status[s]["grammar_entry"], status[s]["value"]]}})
+    print_data(["action_success_response", *data2print])
     payload = response_template.render()
     response = app.response_class(response=payload, status=200, mimetype='application/json')
     logger.info("Sending successful action response to TDM", response=response)
     return response
+
+
+# return folder id
+# assume that folder names are unique
+@app.route("/folder_name", methods=['POST'])
+def folder_id():
+    payload = request.get_json()
+    name = payload["request"]["parameters"]["folder_name"]
+    if name:
+        folder_name = name["value"].lower()
+        folder_list = zot.all_collections()
+        if folder_list:
+            for folder in folder_list:
+                if folder["data"]["name"].lower() == folder_name:
+                    id_folder = folder["key"]  # folder found
+                    break
+            else:
+                id_folder = "0"
+        else:
+            id_folder = "0 "  # no folders in the lib
+    else:
+        id_folder = "2"  # user did not specify folder
+
+    if id_folder == "0":
+        SCORE_BOARD["folder"]["status"] = "notfound"
+        out_score_board(SCORE_BOARD)
+
+    print_data(["folder_name", name, id_folder, SCORE_BOARD])
+    return query_response(value=id_folder, grammar_entry=id_folder)
 
 
 # return count + type
@@ -174,7 +220,7 @@ def action_success_response():
 def items_num_type():
     payload = request.get_json()
     item_type = payload["request"]["parameters"]["type"]
-    print_data(item_type)
+    # folder = payload["request"]["parameters"]["folder"]
 
     if not item_type:
         num = zot.count_items()
@@ -184,14 +230,13 @@ def items_num_type():
         items = zot.everything(zot.items())
         r_type = " ".join(re.findall("[A-Z][^A-Z]*|[a-z]*", item_type["value"]))
         r_type = r_type.strip().lower()
-        print_data(r_type)
         for item in items:
             num += (item['data']['itemType'] == item_type["value"])
         if num > 1:
             r_type += "s"
 
     num = str(num) + " " + r_type
-    print_data(num)
+    print_data(["count_type", item_type, num])
     return query_response(value=None, grammar_entry=num)
 
 
@@ -199,15 +244,15 @@ def items_num_type():
 def check_type():
     payload = request.get_json()
     item_type = payload["request"]["parameters"]["type"]
-    print_data(item_type)
 
     if not item_type:
         r_type = "records"
     else:
         r_type = " ".join(re.findall("[A-Z][^A-Z]*|[a-z]*", item_type["value"]))
         # r_type_g = item_type["grammar_entry"]
-
-    # When I ser the value the response to ReportEmpty when I have a question
+    r_type = r_type.strip().lower()
+    print_data(["check_item_type", item_type, r_type])
+    # When I set the value the response to ReportEmpty when I have a question
     # How many journal article do I have is empty
     return query_response(value=None, grammar_entry=r_type)
 
@@ -217,7 +262,6 @@ def check_type():
 def items_num():
     payload = request.get_json()
     item_type = payload["request"]["parameters"]["type"]
-    print_data(item_type)
 
     if not item_type:
         num = zot.count_items()
@@ -231,18 +275,39 @@ def items_num():
     # programming requerement! To interact with if/then statement the value
     # should have the number, but if I return None in grammar_entry I got an
     # buildig error.
-    print_data(num)
+    print_data(["count_only", item_type, num])
     return query_response(value=str(num), grammar_entry=str(num))
+
+
+@app.route("/folder_fail_response", methods=['POST'])
+def folder_fail_response():
+    # check fail reason
+    reason = "fail"
+    if SCORE_BOARD["folder"]["status"] == "notfound":
+        reason = "no_folder_found"
+        # reset fail reason
+        SCORE_BOARD["folder"]["status"] = "None"
+        out_score_board(SCORE_BOARD)
+
+    print_data(["folder_fail_response", reason])
+    response_template = environment.from_string(
+        """
+   {
+     "status": "success",
+     "data": {
+       "version": "1.1"
+     }
+   }
+   """
+    )
+    payload = response_template.render()
+    response = app.response_class(response=payload, status=200, mimetype='application/json')
+    logger.info("Sending successful action response to TDM", response=response)
+    return response
 
 
 def print_data(data):
     print("\n\n......................")
-    if isinstance(data, list):
-        for d in data:
-            print(f"--> {d}")
-    elif isinstance(data, dict):
-        print("-->", end="")
-        pprint(data, indent=2)
-    else:
-        print(f"--> {data}")
+    for d in data:
+        pprint(f"--> {d}")
     print("......................\n\n")

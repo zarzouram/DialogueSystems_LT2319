@@ -8,51 +8,43 @@
     </plan>
   </goal>
 
-  <!-- 01: User Query about items number p: items_num -->
-  <!-- if the user did not specify item type or collection name we assume that
-  the the user ask about the whole database -->
-  <!-- <goal type="resolve" question_type="wh_question" predicate="count">
-    <plan>
-      <bind type="wh_question" predicate="type"/>
-      <invoke_service_query predicate="count" type="wh_question"/>
-    </plan>
-    <postplan>
-      <if>
-        <condition>
-          <proposition predicate="count" value="0"/>
-        </condition>
-        <then>
-          <invoke_service_action name="ReportEmpty" postconfirm="true"/>
-        </then>
-        <else>
-          <invoke_service_action name="ReportCount" postconfirm="true"/>
-        </else>
-      </if>
-    </postplan>
-  </goal> -->
-
   <goal type="resolve" question_type="wh_question" predicate="count">
     <plan>
-      <!-- <invoke_service_query> does not return multiple variables        -->
-      <!-- Need the system to utter "COUNT + TYPE(plural|singular)"         -->
-      <!-- e.g. x paper(s), if you speak Arabic this will be a miss         -->
-      <!-- predicate count has count+type(lural|singular), while count_only -->
-      <!-- has the count only to use it in the if/then statement            -->
-      <bind type="wh_question" predicate="type"/>
-      <invoke_service_query predicate="count_type" type="wh_question"/>
-      <invoke_service_query predicate="count_only" type="wh_question"/>
-      <invoke_service_query predicate="check_type" type="wh_question"/>
+      <!-- First check if the folder exists  -->
+      <bind type="wh_question" predicate="debug"/>
+      <bind type="wh_question" predicate="folder_name"/>
+      <invoke_service_query predicate="folder_id" type="wh_question"/>
       <if>
         <condition>
-          <proposition predicate="count_only" value="0"/>
+          <proposition predicate="folder_id" value="0"/>
         </condition>
         <then>
-          <invoke_service_action name="ReportEmpty" postconfirm="true"/>
-          <signal_action_completion/>
+          <invoke_service_action name="ReportFolderFail" postconfirm="true"/>
         </then>
         <else>
-          <invoke_service_action name="ReportCount" postconfirm="true"/>
-          <signal_action_completion/>
+          <!-- <invoke_service_query> does not return multiple variables    -->
+          <!-- Need the system to utter "COUNT + TYPE(plural|singular)"     -->
+          <!-- e.g. x paper(s),                                             -->
+          <!-- predicate count has count+type(plural|singular), while       -->
+          <!-- count_int has the count only to use it in the if/then        -->
+          <!-- statement                                                    -->
+          <bind type="wh_question" predicate="type"/>
+          <invoke_service_query predicate="count_type" type="wh_question"/>
+          <invoke_service_query predicate="count_int" type="wh_question"/>
+          <invoke_service_query predicate="check_type" type="wh_question"/>
+          <if>
+            <condition>
+              <proposition predicate="count_int" value="0"/>
+            </condition>
+            <then>
+              <invoke_service_action name="ReportEmpty" postconfirm="true"/>
+              <forget_all/>
+            </then>
+            <else>
+              <invoke_service_action name="ReportCount" postconfirm="true"/>
+              <forget_all/>
+            </else>
+          </if>
         </else>
       </if>
     </plan>
@@ -61,6 +53,8 @@
   <parameters predicate="count">
     <background predicate="count_type"/>
     <background predicate="check_type"/>
+    <background predicate="folder_name"/>
+    <background predicate="folder_id"/>
   </parameters>
 
 </domain>

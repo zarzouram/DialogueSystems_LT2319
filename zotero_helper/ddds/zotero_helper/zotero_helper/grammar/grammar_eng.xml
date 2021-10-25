@@ -32,6 +32,9 @@
       <item>How many <slot predicate="type"/> do I have</item>
       <item>how many <slot predicate="type"/> do we have</item>
       <item>how many <slot predicate="type"/> do you have</item>
+      <item>
+        how many items do you have under <slot predicate="folder_name"/>
+      </item>
 
       <item>how many records do you have?</item>
       <item>how many records do we have</item>
@@ -128,16 +131,20 @@
   <!-- **************System's answers  **************  -->
 
   <!-- 01: Query items number p: items_num  -->
-  <!-- <answer speaker="system" predicate="count">
-    You have <slot predicate="count" type="individual"/>
-  </answer> -->
+  <answer speaker="system" predicate="count">
+
+  </answer>
 
   <report action="ReportCount" status="ended">
-    You have <slot predicate="count_type" type="individual"/>
+    You have <slot predicate="count_type"  type="individual"/>
   </report>
 
   <report action="ReportEmpty" status="ended">
     You do not have any <slot predicate="check_type" type="individual"/>
+  </report>
+
+  <report action="ReportFolderFail" status="ended">
+    Sorry, I can not find any folder named <slot predicate="folder_name" type="individual"/>
   </report>
 
   <!-- ************** individuals **************  -->
@@ -155,6 +162,7 @@
   <individual name="conferencePaper">
     <one-of>
       <item>conference paper</item>
+      <item>conference papers</item>
       <item>conference</item>
       <item>paper</item>
     </one-of>
@@ -163,9 +171,17 @@
   <individual name="journalArticle">
     <one-of>
       <item>journal article</item>
+      <item>journal articles</item>
       <item>journal paper</item>
       <item>journal</item>
       <item>article</item>
+    </one-of>
+  </individual>
+
+  <individual name="foldersName">
+    <one-of>
+      <item>test</item>
+      <item>tes</item>
     </one-of>
   </individual>
 

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <service_interface>
 
+  <query name="folder_id">
+    <parameters>
+      <parameter predicate="folder_name" format="grammar_entry" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/folder_name"/>
+    </target>
+  </query>
+
   <query name="count_type">
     <parameters>
       <parameter predicate="type" format="grammar_entry" optional="true"/>
@@ -10,7 +19,7 @@
     </target>
   </query>
 
-  <query name="count_only">
+  <query name="count_int">
     <parameters>
       <parameter predicate="type" format="grammar_entry" optional="true"/>
     </parameters>
@@ -42,6 +51,16 @@
   <action name="ReportCount">
     <parameters>
       <parameter predicate="count_type" format="value" />
+    </parameters>
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/action_success_response"/>
+    </target>
+  </action>
+
+  <action name="ReportFolderFail">
+    <parameters>
+      <parameter predicate="folder_name" format="value" />
     </parameters>
     <failure_reasons/>
     <target>
