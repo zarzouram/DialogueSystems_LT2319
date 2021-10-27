@@ -38,7 +38,10 @@
     <individual name="webpage" sort="record_type"/>
     <individual name="conferencePaper" sort="record_type"/>
     <individual name="journalArticle" sort="record_type"/>
-    <individual name="foldersName" sort="folder_nm_str"/>
+
+    <individual name="KnowlwdgeGraph" sort="folder_nm_str"/>
+    <individual name="NLU" sort="folder_nm_str"/>
+    <individual name="FolderName" sort="folder_nm_str"/>
 
 
 </ontology>

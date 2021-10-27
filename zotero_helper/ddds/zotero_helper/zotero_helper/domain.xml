@@ -11,12 +11,12 @@
   <goal type="resolve" question_type="wh_question" predicate="count">
     <plan>
       <!-- First check if the folder exists  -->
-      <bind type="wh_question" predicate="debug"/>
       <bind type="wh_question" predicate="folder_name"/>
       <invoke_service_query predicate="folder_id" type="wh_question"/>
+      <!-- <invoke_service_query predicate="debug" type="wh_question"/> -->
       <if>
         <condition>
-          <proposition predicate="folder_id" value="0"/>
+          <proposition predicate="folder_id" value="noid"/>
         </condition>
         <then>
           <invoke_service_action name="ReportFolderFail" postconfirm="true"/>
@@ -36,13 +36,13 @@
             <condition>
               <proposition predicate="count_int" value="0"/>
             </condition>
+            <!-- If I want the system to report folder name in his answer I
+            will need to more action reports and a nested if statement -->
             <then>
               <invoke_service_action name="ReportEmpty" postconfirm="true"/>
-              <forget_all/>
             </then>
             <else>
               <invoke_service_action name="ReportCount" postconfirm="true"/>
-              <forget_all/>
             </else>
           </if>
         </else>
@@ -50,11 +50,9 @@
     </plan>
   </goal>
 
-  <parameters predicate="count">
+  <!-- <parameters predicate="count">
     <background predicate="count_type"/>
     <background predicate="check_type"/>
-    <background predicate="folder_name"/>
-    <background predicate="folder_id"/>
-  </parameters>
+  </parameters> -->
 
 </domain>

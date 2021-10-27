@@ -1,17 +1,72 @@
 --- main menu
 S> What would you like to do?
 
---- 01.01: query number of items
+--- 01.01: general count
 S> What would you like to do?
 U> How many items do I have
 S> You have * records
 
---- 01.02: query number of articles
+--- 01.02: articles count
 S> What would you like to do?
-U> How many journal article do I have
+U> How many journal articles do I have
 S> You have * journal articles
 
---- 01.03: query number of webpage
+--- 01.03: webpage count
 S> What would you like to do?
-U> How many web page do I have
-S> You do not have any webpage
+U> How many web pages do I have
+S> You have * webpage
+
+--- 01.04: papers count
+S> What would you like to do?
+U> How many papers do I have
+S> You have * conference papers
+
+--- 01.05: count items under a folder
+S> What would you like to do?
+U> how many items do you have under Knowlwdge Graph
+S> You have * records
+
+--- 01.06: count webpage under a folder
+S> What would you like to do?
+U> how many web pages do you have under Knowlwdge Graph
+S> You have * webpage
+
+--- 01.07: count articles under a folder
+S> What would you like to do?
+U> how many articles do you have under Knowlwdge Graph
+S> You have * journal articles
+
+--- 01.08: count papers under a folder
+S> What would you like to do?
+U> how many papers do you have under Knowlwdge Graph
+S> You have * conference paper
+
+--- 01.09: count items under an empty folder
+S> What would you like to do?
+U> how many items do you have under NLU
+S> You do not have any records
+
+--- 01.10: count webpages under an empty folder
+S> What would you like to do?
+U> how many web pages do you have under NLU
+S> You do not have any webpages
+
+--- 01.11: count articles under an empty folder
+S> What would you like to do?
+U> how many articles do you have under NLU
+S> You do not have any journal articles
+
+--- 01.12: count items under nonexisting folder
+S> What would you like to do?
+U> how many items do you have under AI
+S> Sorry, I can not find any folder named AI
+
+--- 01.10: count webpages under an empty folder
+S> What would you like to do?
+U> how many web pages do you have under AI
+S> Sorry, I can not find any folder named AI
+
+--- 01.11: count articles under an empty folder
+S> What would you like to do?
+U> how many articles do you have under AI
+S> Sorry, I can not find any folder named AI

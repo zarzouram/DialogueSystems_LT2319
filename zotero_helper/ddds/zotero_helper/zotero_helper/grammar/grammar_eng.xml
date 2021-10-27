@@ -35,6 +35,9 @@
       <item>
         how many items do you have under <slot predicate="folder_name"/>
       </item>
+      <item>
+        how many <slot predicate="type"/> do you have under <slot predicate="folder_name"/>
+      </item>
 
       <item>how many records do you have?</item>
       <item>how many records do we have</item>
@@ -132,7 +135,6 @@
 
   <!-- 01: Query items number p: items_num  -->
   <answer speaker="system" predicate="count">
-
   </answer>
 
   <report action="ReportCount" status="ended">
@@ -140,11 +142,11 @@
   </report>
 
   <report action="ReportEmpty" status="ended">
-    You do not have any <slot predicate="check_type" type="individual"/>
+    You do not have any <slot predicate="check_type" type="individual"/>s
   </report>
 
   <report action="ReportFolderFail" status="ended">
-    Sorry, I can not find any folder named <slot predicate="folder_name" type="individual"/>
+    Sorry, I can not find any folder named <slot predicate="folder_name"/>
   </report>
 
   <!-- ************** individuals **************  -->
@@ -152,10 +154,14 @@
   <individual name="webpage">
     <one-of>
       <item>web page</item>
+      <item>web pages</item>
       <item>web site</item>
       <item>internet site</item>
       <item>site</item>
       <item>page</item>
+      <item>internet sites</item>
+      <item>sites</item>
+      <item>pages</item>
     </one-of>
   </individual>
 
@@ -165,6 +171,8 @@
       <item>conference papers</item>
       <item>conference</item>
       <item>paper</item>
+      <item>conferences</item>
+      <item>papers</item>
     </one-of>
   </individual>
 
@@ -173,15 +181,27 @@
       <item>journal article</item>
       <item>journal articles</item>
       <item>journal paper</item>
-      <item>journal</item>
+      <item>journal papers</item>
       <item>article</item>
+      <item>articles</item>
     </one-of>
   </individual>
 
-  <individual name="foldersName">
+  <individual name="KnowlwdgeGraph">
     <one-of>
-      <item>test</item>
-      <item>tes</item>
+      <item>Knowlwdge Graph</item>
+    </one-of>
+  </individual>
+
+  <individual name="NLU">
+    <one-of>
+      <item>NLU</item>
+    </one-of>
+  </individual>
+
+  <individual name="FolderName">
+    <one-of>
+      <item>AI</item>
     </one-of>
   </individual>
 
