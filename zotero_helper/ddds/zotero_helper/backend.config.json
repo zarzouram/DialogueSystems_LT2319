@@ -17,7 +17,7 @@
     "inactive_seconds_allowed": 7200,
     "repeat_questions": true,
     "rerank_amount": 0.2,
-    "response_timeout": 5,
+    "response_timeout": 25,
     "supported_languages": [
         "eng"
     ],

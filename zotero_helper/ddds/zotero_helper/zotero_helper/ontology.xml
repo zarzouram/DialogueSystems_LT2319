@@ -2,8 +2,9 @@
 <ontology name="ZoteroHelperOntology">
 
     <!-- ******* Actions  ******* -->
-    <!-- <action name="report_count"/>
-    <action name="report_empty"/> -->
+    <action name="add_item"/>
+    <action name="add_by_identfier"/>
+    <action name="add_manually"/>
 
     <!-- ******* Custom sorts  *******-->
     <sort name="debug_step" dynamic="true"/>
@@ -19,6 +20,12 @@
     <sort name="folder_nm_str" dynamic="true"/>
     <sort name="folder_id_str" dynamic="true"/>
 
+    <sort name="item_info" dynamic="true"/>
+    <sort name="item_title_info" dynamic="true"/>
+    <sort name="authors_info" dynamic="true"/>
+
+    <sort name="service_info"/>
+
     <!-- ******* Predicates ******* -->
     <predicate name="debug" sort="debug_step"/>
 
@@ -30,8 +37,27 @@
     <predicate name="check_type" sort="query_type"/>
 
     <predicate name="folder" sort="folder_info"/>
+    <!-- <predicate name="folder" sort="string"/> -->
     <predicate name="folder_name" sort="folder_nm_str"/>
     <predicate name="folder_id" sort="folder_id_str"/>
+    <predicate name="folder_id_dist" sort="folder_id_str"/>
+
+    <predicate name="cite_info" sort="item_info"/>
+    <predicate name="item_identifier" sort="item_info"/>
+    <predicate name="item_identifier_url" sort="item_info"/>
+    <predicate name="item_title" sort="item_info"/>
+    <predicate name="item_authors" sort="item_info"/>
+
+    <predicate name="title" sort="item_title_info"/>
+    <predicate name="authors" sort="authors_info"/>
+    <predicate name="first_first_name" sort="authors_info"/>
+    <predicate name="first_last_name" sort="authors_info"/>
+    <predicate name="second_first_name" sort="authors_info"/>
+    <predicate name="second_last_name" sort="authors_info"/>
+    <predicate name="third_first_name" sort="authors_info"/>
+    <predicate name="third_last_name" sort="authors_info"/>
+
+    <predicate name="confirm_add" sort="service_info"/>
 
     <!-- ******* Individual ******* -->
     <!-- item type -->
@@ -41,7 +67,27 @@
 
     <individual name="KnowlwdgeGraph" sort="folder_nm_str"/>
     <individual name="NLU" sort="folder_nm_str"/>
-    <individual name="FolderName" sort="folder_nm_str"/>
+    <individual name="AI" sort="folder_nm_str"/>
+    <!-- <individual name="CurrentFolder" sort="folder_nm_str"/> -->
+    <individual name="Review" sort="folder_nm_str"/>
+    <individual name="LibraryFolder" sort="folder_nm_str"/>
+    <individual name="TO" sort="folder_nm_str"/>
+    <individual name="DM" sort="folder_nm_str"/>
 
+    <individual name="ArxivIdentifierReview1" sort="item_info"/>
+    <individual name="ArxivIdentifierReview2" sort="item_info"/>
+    <individual name="ArxivIdentifierLib" sort="item_info"/>
+    <individual name="ArxivIdentifierTOD1" sort="item_info"/>
+    <individual name="ArxivIdentifierTOD2" sort="item_info"/>
+    <individual name="ArxivIdentifierDM" sort="item_info"/>
+
+    <individual name="FirstFirstName" sort="authors_info"/>
+    <individual name="FirstLastName" sort="authors_info"/>
+    <individual name="SecondFirstName" sort="authors_info"/>
+    <individual name="SecondLastName" sort="authors_info"/>
+    <individual name="ThirdFirstName" sort="authors_info"/>
+    <individual name="ThirdLastName" sort="authors_info"/>
+
+    <individual name="TitleName" sort="item_title_info"/>
 
 </ontology>

@@ -21,8 +21,54 @@
     </one-of>
   </action>
 
-  <!-- ************** User Questions **************   -->
+  <!-- Actions -->
+  <action name="add_item">
+    <one-of>
+      <item>add an item</item>
+      <item>add a paper</item>
+      <item>I want to add a paper</item>
+    </one-of>
+  </action>
 
+  <action name="add_by_identfier">
+    <one-of>
+      <item>add an item by identfier</item>
+      <item>add a paper  by identfier</item>
+      <item>I want to add a paper by identfier</item>
+      <item>identifier</item>
+      <item>arxiv identfier</item>
+      <item>add <slot predicate="item_identifier"/></item>
+      <item>add to <slot predicate="folder_name"/></item>
+      <item>add an item to <slot predicate="folder_name"/></item>
+      <item>
+        add <slot predicate="item_identifier"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add <slot predicate="item_identifier"/> to <slot predicate="folder_name"/> folder
+      </item>
+      <item>
+        add <slot predicate="item_identifier"/> to the <slot predicate="folder_name"/> folder
+      </item>
+      <item>
+        add <slot predicate="item_identifier"/> to my <slot predicate="folder_name"/> folder
+      </item>
+      <item>
+        put <slot predicate="item_identifier"/> under <slot predicate="folder_name"/>
+      </item>
+    </one-of>
+  </action>
+
+  <action name="add_manually">
+    <one-of>
+      <item>add an item manually</item>
+      <item>add a paper manually</item>
+      <item>manually</item>
+    </one-of>
+  </action>
+
+  <!-- ************** All Questions ************** -->
+
+  <!-- ************** User Questions **************   -->
   <!-- 01: Query items number p: items_num  -->
   <question speaker="user" predicate="count" type="wh_question">
     <one-of>
@@ -129,14 +175,61 @@
     </one-of>
   </question>
 
+  <!-- ************** User Answers **************   -->
+  <answer speaker="user" predicate="folder_name">
+    <one-of>
+      <item><slot predicate="folder_name"/></item>
+      <item>use <slot predicate="folder_name"/></item>
+      <item>add it to <slot predicate="folder_name"/></item>
+      <item>add to <slot predicate="folder_name"/></item>
+    </one-of>
+  </answer>
+
+  <answer speaker="user" predicate="title">
+    <one-of>
+      <item><slot predicate="title" type="individual"/></item>
+      <item>the title is <slot predicate="title" type="individual"/></item>
+    </one-of>
+  </answer>
+
+  <answer speaker="user" predicate="first_name">
+    <one-of>
+      <item><slot predicate="first_name"/></item>
+      <item>the first name is <slot predicate="first_name"/></item>
+    </one-of>
+  </answer>
+
   <!-- ************** System Questions **************  -->
+  <question speaker="system" predicate="item_identifier" type="wh_question">
+    what identifier
+  </question>
 
-  <!-- **************System's answers  **************  -->
+  <question speaker="system" predicate="folder_name" type="wh_question">
+    Select a distination folder
+  </question>
 
-  <!-- 01: Query items number p: items_num  -->
+  <question speaker="system" predicate="type" type="wh_question">
+    what is the item type
+  </question>
+
+  <question speaker="system" predicate="title" type="wh_question">
+    what is the item title
+  </question>
+
+  <question speaker="system" predicate="first_name" type="wh_question">
+    what is the authors first name
+  </question>
+
+  <question speaker="system" predicate="last_name" type="wh_question">
+    what is the authors last name
+  </question>
+
+  <!-- ************** System's answers  **************  -->
+  <!-- 01: Query  -->
   <answer speaker="system" predicate="count">
   </answer>
 
+  <!-- System Reports  -->
   <report action="ReportCount" status="ended">
     You have <slot predicate="count_type"  type="individual"/>
   </report>
@@ -148,6 +241,28 @@
   <report action="ReportFolderFail" status="ended">
     Sorry, I can not find any folder named <slot predicate="folder_name"/>
   </report>
+
+  <report action="AddIdentifier" status="ended">
+    Succssefully added <slot predicate="item_title" type="individual"/>
+  </report>
+
+  <report action="CreateFolder" status="ended">
+    Succssefully created <slot predicate="folder_name" type="individual"/>
+  </report>
+
+  <report action="Dummy" status="ended">
+    Done
+  </report>
+
+
+  <!-- ************** Preconfirms ************** -->
+  <preconfirm action="AddIdentifier">
+    add <slot predicate="item_title" type="individual"/>
+  </preconfirm>
+
+  <preconfirm action="CreateFolder">
+    create <slot predicate="folder_name" type="individual"/>
+  </preconfirm>
 
   <!-- ************** individuals **************  -->
 
@@ -187,21 +302,175 @@
     </one-of>
   </individual>
 
+  <!-- folder in database -->
   <individual name="KnowlwdgeGraph">
     <one-of>
       <item>Knowlwdge Graph</item>
     </one-of>
   </individual>
 
+  <!-- Empty folder in database -->
   <individual name="NLU">
     <one-of>
       <item>NLU</item>
     </one-of>
   </individual>
 
-  <individual name="FolderName">
+  <!-- folder in database -->
+  <individual name="Review">
+    <one-of>
+      <item>reviews</item>
+    </one-of>
+  </individual>
+
+  <!-- Folder not in database for test -->
+  <individual name="TO">
+    <one-of>
+      <item>Task Oriented</item>
+    </one-of>
+  </individual>
+
+  <!-- Folder not in database for test -->
+  <individual name="AI">
     <one-of>
       <item>AI</item>
+    </one-of>
+  </individual>
+
+
+  <!-- Folder not in database for test -->
+  <individual name="DM">
+    <one-of>
+      <item>DM</item>
+    </one-of>
+  </individual>
+
+  <!-- <individual name="CurrentFolder">
+    <one-of>
+      <item>use current folder</item>
+      <item>current folder</item>
+      <item>the current folder</item>
+    </one-of>
+  </individual> -->
+
+  <individual name="LibraryFolder">
+    <one-of>
+      <item>library</item>
+      <item>my library</item>
+    </one-of>
+  </individual>
+
+  <individual name="ArxivIdentifierReview1">
+    <one-of>
+      <item>1306.4134v1</item>
+      <item>one three zero six dot four one three four v one</item>
+    </one-of>
+  </individual>
+  <individual name="ArxivIdentifierReview2">
+    <one-of>
+      <item>2103.03125v2</item>
+      <item>two one zero three dot zero three one two five v two</item>
+    </one-of>
+  </individual>
+  <individual name="ArxivIdentifierTOD1">
+    <one-of>
+      <item>1909.09484v1</item>
+      <item>one nine zero nine dot zero nine four eight four v one</item>
+    </one-of>
+  </individual>
+  <individual name="ArxivIdentifierLib">
+    <one-of>
+      <item>2110.08032v1</item>
+      <item>two one one zero dot zero eight zero three two v one</item>
+    </one-of>
+  </individual>
+  <individual name="ArxivIdentifierDM">
+    <one-of>
+      <item>1907.00684v1</item>
+      <item>one nine zero seven dot zero zero six eight four v one</item>
+    </one-of>
+  </individual>
+  <individual name="ArxivIdentifierTOD2">
+    <one-of>
+      <item>1711.10712v2</item>
+      <item>one seven one one dot one zero seven one two v two</item>
+    </one-of>
+  </individual>
+
+
+  <individual name="FirstFirstName">
+    <one-of>
+      <item>Tian</item>
+      <item>Xianling</item>
+      <item>Heyan</item>
+      <item>Juliana</item>
+      <item>Louisa</item>
+      <item>Wolfgang</item>
+      <item>Stefan</item>
+    </one-of>
+  </individual>
+  <individual name="FirstLastName">
+    <one-of>
+      <item>Lan</item>
+      <item>Mao</item>
+      <item>Huang</item>
+      <item>Miehle</item>
+      <item>Pragst</item>
+      <item>Minker</item>
+      <item>Ultes</item>
+    </one-of>
+  </individual>
+  <individual name="SecondFirstName">
+    <one-of>
+      <item>Tian</item>
+      <item>Xianling</item>
+      <item>Heyan</item>
+      <item>Juliana</item>
+      <item>Louisa</item>
+      <item>Wolfgang</item>
+      <item>Stefan</item>
+    </one-of>
+  </individual>
+  <individual name="SecondLastName">
+    <one-of>
+      <item>Lan</item>
+      <item>Mao</item>
+      <item>Huang</item>
+      <item>Miehle</item>
+      <item>Pragst</item>
+      <item>Minker</item>
+      <item>Ultes</item>
+    </one-of>
+  </individual>
+  <individual name="ThirdFirstName">
+    <one-of>
+      <item>Tian</item>
+      <item>Xianling</item>
+      <item>Heyan</item>
+      <item>Juliana</item>
+      <item>Louisa</item>
+      <item>Wolfgang</item>
+      <item>Stefan</item>
+    </one-of>
+  </individual>
+  <individual name="ThirdLastName">
+    <one-of>
+      <item>Lan</item>
+      <item>Mao</item>
+      <item>Huang</item>
+      <item>Miehle</item>
+      <item>Pragst</item>
+      <item>Minker</item>
+      <item>Ultes</item>
+    </one-of>
+  </individual>
+
+  <individual name="TitleName">
+    <one-of>
+      <item>Generative Dialog Policy for Task-oriented Dialog Systems</item>
+      <item>UniDS: A Unified Dialogue System for Chit-Chat and Task-oriented Dialogues</item>
+      <item>Enabling Dialogue Management with Dynamically Created Dialogue Actions</item>
+      <item>Dialogue System%3A A Brief Review</item>
     </one-of>
   </individual>
 

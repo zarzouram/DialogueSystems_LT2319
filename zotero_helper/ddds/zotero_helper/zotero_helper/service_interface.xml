@@ -10,13 +10,15 @@
     </target>
   </query> -->
 
-
+  <!-- ************* Count Services ************* -->
+  <!-- Queries -->
   <query name="folder_id">
     <parameters>
       <parameter predicate="folder_name" format="grammar_entry" optional="true"/>
+      <parameter predicate="folder_id" format="grammar_entry" optional="true"/>
     </parameters>
     <target>
-        <http endpoint="http://http-service/folder_name"/>
+        <http endpoint="http://http-service/folder_id"/>
     </target>
   </query>
 
@@ -49,6 +51,7 @@
     </target>
   </query>
 
+  <!-- Actions -->
   <action name="ReportEmpty">
     <parameters>
       <parameter predicate="type" format="grammar_entry" optional="true"/>
@@ -79,5 +82,96 @@
         <http endpoint="http://http-service/folder_fail_response"/>
     </target>
   </action>
+
+  <!-- ************* Add items Services ************* -->
+  <!-- Queries -->
+  <query name="item_identifier_url">
+    <parameters>
+      <parameter predicate="item_identifier" format="value" />
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/identifier_url"/>
+    </target>
+  </query>
+
+  <query name="cite_info">
+    <parameters>
+      <parameter predicate="item_identifier_url" format="value" />
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/cite_info"/>
+    </target>
+  </query>
+
+  <query name="item_title">
+    <parameters>
+      <parameter predicate="cite_info" format="value" />
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/title"/>
+    </target>
+  </query>
+
+  <query name="folder_id_dist">
+    <parameters>
+      <parameter predicate="folder_name" format="value"/>
+      <parameter predicate="folder_id" format="grammar_entry" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/folder_id"/>
+    </target>
+  </query>
+
+  <query name="item_authors">
+    <parameters>
+      <parameter predicate="cite_info" format="value" />
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/authors"/>
+    </target>
+  </query>
+
+  <query name="folder">
+    <!-- <parameters>
+      <parameter predicate="item_identifier" format="value" />
+    </parameters> -->
+    <parameters/>
+    <target>
+        <http endpoint="http://http-service/folder_status"/>
+    </target>
+  </query>
+
+  <!-- Actions -->
+  <action name="AddIdentifier">
+    <parameters>
+      <parameter predicate="item_title" format="value" />
+    </parameters>
+    <!-- <parameters/> -->
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/create_item"/>
+    </target>
+  </action>
+
+  <action name="CreateFolder">
+    <parameters>
+      <parameter predicate="folder_name" format="value" />
+    </parameters>
+    <!-- <parameters/> -->
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/create_folder"/>
+    </target>
+  </action>
+
+  <action name="Dummy">
+    <parameters/>
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/action_success_response"/>
+    </target>
+  </action>
+
+
 
 </service_interface>

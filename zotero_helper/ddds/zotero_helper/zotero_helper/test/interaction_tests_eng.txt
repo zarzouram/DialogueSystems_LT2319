@@ -1,72 +1,136 @@
 --- main menu
 S> What would you like to do?
 
---- 01.01: general count
+--- add_identifier.01: multimodal-incremental-add to the library
+S> What would you like to do?
+U> add an item
+S> Do you want to add an item by identfier or add an item manually?
+U> identifier
+S> What identifier?
+U> two one one zero dot zero eight zero three two v one
+S> Select a distination folder?
+U> add it to my library
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- add_identifier.02: incremental-1-add to an existing folder
+S> What would you like to do?
+U> add an item by identfier
+S> What identifier?
+U> one three zero six dot four one three four v one
+S> Select a distination folder?
+U> add to reviews
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- add_identifier.03: incremental-1-add to an non-existing folder
+S> What would you like to do?
+U> add one nine zero nine dot zero nine four eight four v one
+S> Select a distination folder?
+U> Task Oriented
+S> Do you want to create Task Oriented?
+U> yes
+S> Succssefully created Task Oriented
+U>
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- add_identifier.04: incremental-1-add to an existing folder
+S> What would you like to do?
+U> add an item to Task Oriented
+S> What identifier?
+U> one seven one one dot one zero seven one two v two
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- add_identifier.05: oneshot-add to an existing folder
+S> What would you like to do?
+U> add two one zero three dot zero three one two five v two to the reviews folder
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- add_identifier.06: oneshot-add to a non-existing folder
+S> What would you like to do?
+U> add one nine zero seven dot zero zero six eight four v one to my DM folder
+S> Do you want to create DM?
+U> yes
+S> Succssefully created DM
+U>
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- count.01: general count
 S> What would you like to do?
 U> How many items do I have
 S> You have * records
 
---- 01.02: articles count
+--- count.02: articles count
 S> What would you like to do?
 U> How many journal articles do I have
 S> You have * journal articles
 
---- 01.03: webpage count
+--- count.03: webpage count
 S> What would you like to do?
 U> How many web pages do I have
 S> You have * webpage
 
---- 01.04: papers count
+--- count.04: papers count
 S> What would you like to do?
 U> How many papers do I have
 S> You have * conference papers
 
---- 01.05: count items under a folder
+--- count.05: count items under a folder
 S> What would you like to do?
 U> how many items do you have under Knowlwdge Graph
 S> You have * records
 
---- 01.06: count webpage under a folder
+--- count.06: count webpage under a folder
 S> What would you like to do?
 U> how many web pages do you have under Knowlwdge Graph
 S> You have * webpage
 
---- 01.07: count articles under a folder
+--- count.07: count articles under a folder
 S> What would you like to do?
 U> how many articles do you have under Knowlwdge Graph
 S> You have * journal articles
 
---- 01.08: count papers under a folder
+--- count.08: count papers under a folder
 S> What would you like to do?
 U> how many papers do you have under Knowlwdge Graph
 S> You have * conference paper
 
---- 01.09: count items under an empty folder
+--- count.09: count items under an empty folder
 S> What would you like to do?
 U> how many items do you have under NLU
 S> You do not have any records
 
---- 01.10: count webpages under an empty folder
+--- count.10: count webpages under an empty folder
 S> What would you like to do?
 U> how many web pages do you have under NLU
 S> You do not have any webpages
 
---- 01.11: count articles under an empty folder
+--- count.11: count articles under an empty folder
 S> What would you like to do?
 U> how many articles do you have under NLU
 S> You do not have any journal articles
 
---- 01.12: count items under nonexisting folder
+--- count.12: count items under nonexisting folder
 S> What would you like to do?
 U> how many items do you have under AI
 S> Sorry, I can not find any folder named AI
 
---- 01.10: count webpages under an empty folder
+--- count.10: count webpages under an empty folder
 S> What would you like to do?
 U> how many web pages do you have under AI
 S> Sorry, I can not find any folder named AI
 
---- 01.11: count articles under an empty folder
+--- count.11: count articles under an empty folder
 S> What would you like to do?
 U> how many articles do you have under AI
 S> Sorry, I can not find any folder named AI

@@ -5,9 +5,128 @@
     <plan>
       <forget_all/>
       <findout type="goal"/>
+      <!-- <findout type="alt_question">
+        <alt>
+          <perform action="add_items"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="search_items"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="query_data"/>
+        </alt>
+      </findout> -->
     </plan>
   </goal>
 
+  <!-- Help menue -->
+  <!-- <goal type="resolve" question_type="wh_question" predicate="help">
+    <plan>
+      <findout type="alt_question">
+        <alt>
+          <resolve type="wh_question" predicate="help_add"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="help_search"/>
+        </alt>
+        <alt>
+          <resolve type="wh_question" predicate="help_query"/>
+        </alt>
+      </findout>
+    </plan>
+  </goal> -->
+
+  <!-- ************** Actions ************** -->
+  <!-- Add items -->
+  <!-- Add by arxiv identifier OR manually -->
+  <goal type="perform" action="add_item">
+    <plan>
+      <findout type="alt_question">
+        <alt>
+          <perform action="add_by_identfier"/>
+        </alt>
+        <alt>
+          <perform action="add_manually"/>
+        </alt>
+      </findout>
+    </plan>
+  </goal>
+
+  <goal type="perform" action="add_by_identfier">
+    <plan>
+      <findout type="wh_question" predicate="item_identifier"/>
+      <invoke_service_query predicate="item_identifier_url" type="wh_question"/>
+      <invoke_service_query predicate="cite_info" type="wh_question"/>
+      <invoke_service_query predicate="item_title" type="wh_question"/>
+
+      <findout type="wh_question" predicate="folder_name"/>
+      <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+      <if>
+        <condition>
+          <!-- requested folder not found create folder -->
+          <proposition predicate="folder_id_dist" value="noid"/>
+        </condition>
+        <then>
+          <invoke_service_query predicate="folder" type="wh_question"/>
+          <invoke_service_action name="CreateFolder" preconfirm="interrogative"
+          postconfirm="true"/>
+          <!-- <forget predicate="folder_id_dist"/> -->
+          <!-- <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+          <invoke_service_action name="AddIdentifier" preconfirm="interrogative" postconfirm="true"/> -->
+        </then>
+        <else>
+          <if>
+            <condition>
+              <!-- current folder is not known by the system ask for the folder
+              not implemented-->
+              <proposition predicate="folder_id_dist" value="0"/>
+            </condition>
+            <then>
+              <!-- <forget predicate="folder_id_dist"/>
+              <invoke_service_query predicate="folder_id_dist"
+              type="wh_question"/> -->
+              <!-- <invoke_service_action name="AddIdentifier"
+              preconfirm="interrogative" postconfirm="true"/> -->
+              <invoke_service_action name="Dummy" postconfirm="false"/>
+            </then>
+            <else>
+              <invoke_service_query predicate="folder" type="wh_question"/>
+              <invoke_service_action name="AddIdentifier"
+              preconfirm="interrogative" postconfirm="true"/>
+            </else>
+          </if>
+        </else>
+      </if>
+    </plan>
+    <postplan>
+      <if>
+        <condition>
+          <proposition predicate="folder" value="created"/>
+        </condition>
+        <then>
+          <forget predicate="folder_id_dist"/>
+          <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+          <invoke_service_action name="AddIdentifier" preconfirm="interrogative" postconfirm="true"/>
+        </then>
+        <!-- <else>
+          <invoke_service_action name="Dummy" postconfirm="false"/>
+        </else> -->
+      </if>
+    </postplan>
+  </goal>
+
+  <!-- Not impelemented -->
+  <goal type="perform" action="add_manually">
+    <plan>
+      <findout type="wh_question" predicate="type"/>
+      <findout type="wh_question" predicate="title"/>
+      <findout type="wh_question" predicate="authors"/>
+      <invoke_service_action name="Dummy" postconfirm="true"/>
+    </plan>
+  </goal>
+
+
+  <!-- count -->
   <goal type="resolve" question_type="wh_question" predicate="count">
     <plan>
       <!-- First check if the folder exists  -->
@@ -50,9 +169,9 @@
     </plan>
   </goal>
 
-  <!-- <parameters predicate="count">
-    <background predicate="count_type"/>
-    <background predicate="check_type"/>
+  <!-- <parameters predicate="authors">
+    <background predicate="first_name"/>
+    <background predicate="last_name"/>
   </parameters> -->
 
 </domain>
