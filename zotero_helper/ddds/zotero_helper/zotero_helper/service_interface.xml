@@ -104,9 +104,10 @@
   </query>
 
   <query name="item_title">
-    <parameters>
+    <!-- <parameters>
       <parameter predicate="cite_info" format="value" />
-    </parameters>
+    </parameters> -->
+    <parameters/>
     <target>
         <http endpoint="http://http-service/title"/>
     </target>
@@ -119,6 +120,16 @@
     </parameters>
     <target>
         <http endpoint="http://http-service/folder_id"/>
+    </target>
+  </query>
+
+  <query name="next_author">
+    <parameters>
+      <parameter predicate="second_first_name" format="value" optional="true"/>
+      <parameter predicate="third_first_name" format="value" optional="true"/>
+    </parameters>
+    <target>
+        <http endpoint="http://http-service/next_author"/>
     </target>
   </query>
 
@@ -142,9 +153,9 @@
   </query>
 
   <!-- Actions -->
-  <action name="AddIdentifier">
+  <action name="AddItem">
     <parameters>
-      <parameter predicate="item_title" format="value" />
+      <parameter predicate="item_title" format="grammar_entry" />
     </parameters>
     <!-- <parameters/> -->
     <failure_reasons/>
@@ -168,7 +179,15 @@
     <parameters/>
     <failure_reasons/>
     <target>
-        <http endpoint="http://http-service/action_success_response"/>
+        <http endpoint="http://http-service/dummy"/>
+    </target>
+  </action>
+
+  <action name="Dummy2">
+    <parameters/>
+    <failure_reasons/>
+    <target>
+        <http endpoint="http://http-service/dummy"/>
     </target>
   </action>
 

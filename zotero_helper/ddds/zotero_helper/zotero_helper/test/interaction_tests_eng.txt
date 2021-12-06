@@ -1,7 +1,7 @@
---- main menu
+--- 01-main menu
 S> What would you like to do?
 
---- add_identifier.01: multimodal-incremental-add to the library
+--- 02-add_identifier.01: multimodal-incremental
 S> What would you like to do?
 U> add an item
 S> Do you want to add an item by identfier or add an item manually?
@@ -14,7 +14,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- add_identifier.02: incremental-1-add to an existing folder
+--- 03-add_identifier.02: incremental
 S> What would you like to do?
 U> add an item by identfier
 S> What identifier?
@@ -25,7 +25,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- add_identifier.03: incremental-1-add to an non-existing folder
+--- 04-add_identifier.03: Overanswering-identifier
 S> What would you like to do?
 U> add one nine zero nine dot zero nine four eight four v one
 S> Select a distination folder?
@@ -38,7 +38,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- add_identifier.04: incremental-1-add to an existing folder
+--- 05-add_identifier.04: Overanswering-folder
 S> What would you like to do?
 U> add an item to Task Oriented
 S> What identifier?
@@ -47,14 +47,14 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- add_identifier.05: oneshot-add to an existing folder
+--- 06-add_identifier.05: oneshot-existing folder
 S> What would you like to do?
 U> add two one zero three dot zero three one two five v two to the reviews folder
 S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- add_identifier.06: oneshot-add to a non-existing folder
+--- 07-add_identifier.06: oneshot-nonexisting folder
 S> What would you like to do?
 U> add one nine zero seven dot zero zero six eight four v one to my DM folder
 S> Do you want to create DM?
@@ -65,72 +65,190 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- count.01: general count
+--- 08-add_manually.01: multimodal-incremental-existing folder
+S> What would you like to do?
+U> add an item
+S> Do you want to add an item by identfier or add an item manually?
+U> manually
+S> What is the item type?
+U> journal article
+S> What is the item title?
+U> A Study on Dialogue Reward Prediction for Open-Ended Conversational Agents
+S> What is the first author's first name?
+U> Tian
+S> What is the first author's last name?
+U> Pragst
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
+U> reviews
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 09-add_manually.02: multimodal-incremental-library
+S> What would you like to do?
+U> add an item
+S> Do you want to add an item by identfier or add an item manually?
+U> manually
+S> What is the item type?
+U> journal article
+S> What is the item title?
+U> GRADE Automatic Graph-Enhanced Coherence Metric for Evaluating Open-Domain Dialogue Systems
+S> What is the first author's first name?
+U> Xianling
+S> What is the first author's last name?
+U> Pragst
+S> What is the second author's first name?
+U> Heyan
+S> What is the second author's last name?
+U> Huang
+S> What is the third author's first name?
+U> no additional authors
+S> Select a distination folder?
+U> add it to my library
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 10-add_manually.03: Overanswering-title
+S> What would you like to do?
+U> add Automatically Training a Problematic Dialogue Predictor for a Spoken Dialogue System
+S> What is the item type?
+U> journal article
+S> What is the first author's first name?
+U> Juliana
+S> What is the first author's last name?
+U> Miehle
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
+U> my library
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 11-add_manually.04: Overanswering-title-folder-nonexisting folder
+S> What would you like to do?
+U> add Enabling Dialogue Management with Dynamically Created Dialogue Actions to DA
+S> What is the item type?
+U> journal article
+S> What is the first author's first name?
+U> Louisa
+S> What is the first author's last name?
+U> Lan
+S> What is the second author's first name?
+U> Heyan
+S> What is the second author's last name?
+U> Huang
+S> What is the third author's first name?
+U> Juliana
+S> What is the third author's last name?
+U> Miehle
+S> Do you want to create DA?
+U> yes
+S> Succssefully created DA
+U>
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 12-add_manually.05: Overanswering-type-title-folder-existing folder
+S> What would you like to do?
+U> add a journal article titled Comprehensive Study How the Context Information of Different Granularity Affects Dialogue State Tracking to reviews
+S> What is the first author's first name?
+U> Puhai
+S> What is the first author's last name?
+U> Yang
+S> What is the second author's first name?
+U> Heyan
+S> What is the second author's last name?
+U> Huang
+S> What is the third author's first name?
+U> Xian-Ling
+S> What is the third author's last name?
+U> Mao
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 13-add_manually.06: Overanswering-type-title-one author-firstName-lastName
+S> What would you like to do?
+U> add a journal article titled Dialogue as Discourse Controlling Global Properties of Scripted Dialogue authored by Xianling Lan
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
+U> my library
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 14-count.01: general count
 S> What would you like to do?
 U> How many items do I have
 S> You have * records
 
---- count.02: articles count
+--- 15-count.02: articles count
 S> What would you like to do?
 U> How many journal articles do I have
 S> You have * journal articles
 
---- count.03: webpage count
+--- 16-count.03: webpage count
 S> What would you like to do?
 U> How many web pages do I have
 S> You have * webpage
 
---- count.04: papers count
+--- 17-count.04: papers count
 S> What would you like to do?
 U> How many papers do I have
 S> You have * conference papers
 
---- count.05: count items under a folder
+--- 18-count.05: count items under a folder
 S> What would you like to do?
 U> how many items do you have under Knowlwdge Graph
 S> You have * records
 
---- count.06: count webpage under a folder
+--- 19-count.06: count webpage under a folder
 S> What would you like to do?
 U> how many web pages do you have under Knowlwdge Graph
 S> You have * webpage
 
---- count.07: count articles under a folder
+--- 20-count.07: count articles under a folder
 S> What would you like to do?
 U> how many articles do you have under Knowlwdge Graph
 S> You have * journal articles
 
---- count.08: count papers under a folder
+--- 21-count.08: count papers under a folder
 S> What would you like to do?
 U> how many papers do you have under Knowlwdge Graph
 S> You have * conference paper
 
---- count.09: count items under an empty folder
+--- 22-count.09: count items under an empty folder
 S> What would you like to do?
 U> how many items do you have under NLU
 S> You do not have any records
 
---- count.10: count webpages under an empty folder
+--- 23-ount.10: count webpages under an empty folder
 S> What would you like to do?
 U> how many web pages do you have under NLU
 S> You do not have any webpages
 
---- count.11: count articles under an empty folder
+--- 24-count.11: count articles under an empty folder
 S> What would you like to do?
 U> how many articles do you have under NLU
 S> You do not have any journal articles
 
---- count.12: count items under nonexisting folder
+--- 25-count.12: count items under nonexisting folder
 S> What would you like to do?
 U> how many items do you have under AI
 S> Sorry, I can not find any folder named AI
 
---- count.10: count webpages under an empty folder
+--- 26-count.10: count webpages under an empty folder
 S> What would you like to do?
 U> how many web pages do you have under AI
 S> Sorry, I can not find any folder named AI
 
---- count.11: count articles under an empty folder
+--- 27-count.11: count articles under an empty folder
 S> What would you like to do?
 U> how many articles do you have under AI
 S> Sorry, I can not find any folder named AI

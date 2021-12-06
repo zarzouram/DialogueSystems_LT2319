@@ -63,6 +63,50 @@
       <item>add an item manually</item>
       <item>add a paper manually</item>
       <item>manually</item>
+      <item>
+        add <slot predicate="title"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/>
+      </item>
+
+      <item>
+        add <slot predicate="title"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/> titled <slot predicate="title"/>
+      </item>
+
+      <item>
+        add a <slot predicate="type"/> titled <slot predicate="title"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
+      <item>
+        add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
+
+      <item>
+        add a <slot predicate="type"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>  to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
+      <item>
+        add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
+      </item>
+
+      <item>
+        add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> and <slot predicate="second_first_name"/> <slot predicate="second_last_name"/>
+      </item>
+      <item>
+        add a <slot predicate="type"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
+      </item>
+
     </one-of>
   </action>
 
@@ -192,12 +236,19 @@
     </one-of>
   </answer>
 
-  <answer speaker="user" predicate="first_name">
+  <answer speaker="user" predicate="type">
+    <one-of>
+      <item><slot predicate="type" type="individual"/></item>
+      <item>the type is <slot predicate="type" type="individual"/></item>
+    </one-of>
+  </answer>
+
+  <!-- <answer speaker="user" predicate="first_name">
     <one-of>
       <item><slot predicate="first_name"/></item>
       <item>the first name is <slot predicate="first_name"/></item>
     </one-of>
-  </answer>
+  </answer> -->
 
   <!-- ************** System Questions **************  -->
   <question speaker="system" predicate="item_identifier" type="wh_question">
@@ -216,13 +267,34 @@
     what is the item title
   </question>
 
-  <question speaker="system" predicate="first_name" type="wh_question">
-    what is the authors first name
+  <question speaker="system" predicate="first_first_name" type="wh_question">
+    what is the first author's first name
   </question>
 
-  <question speaker="system" predicate="last_name" type="wh_question">
-    what is the authors last name
+  <question speaker="system" predicate="first_last_name" type="wh_question">
+    what is the first author's last name
   </question>
+
+  <question speaker="system" predicate="second_first_name" type="wh_question">
+    what is the second author's first name
+  </question>
+
+  <question speaker="system" predicate="second_last_name" type="wh_question">
+    what is the second author's last name
+  </question>
+
+  <question speaker="system" predicate="third_first_name" type="wh_question">
+    what is the third author's first name
+  </question>
+
+  <question speaker="system" predicate="third_last_name" type="wh_question">
+    what is the third author's last name
+  </question>
+
+  <question speaker="system" predicate="authors" type="wh_question">
+    d
+  </question>
+
 
   <!-- ************** System's answers  **************  -->
   <!-- 01: Query  -->
@@ -242,8 +314,8 @@
     Sorry, I can not find any folder named <slot predicate="folder_name"/>
   </report>
 
-  <report action="AddIdentifier" status="ended">
-    Succssefully added <slot predicate="item_title" type="individual"/>
+  <report action="AddItem" status="ended">
+    Succssefully added <slot predicate="item_title"/>
   </report>
 
   <report action="CreateFolder" status="ended">
@@ -254,9 +326,13 @@
     Done
   </report>
 
+  <report action="Dummy2" status="ended">
+    Done 2
+  </report>
+
 
   <!-- ************** Preconfirms ************** -->
-  <preconfirm action="AddIdentifier">
+  <preconfirm action="AddItem">
     add <slot predicate="item_title" type="individual"/>
   </preconfirm>
 
@@ -345,6 +421,13 @@
     </one-of>
   </individual>
 
+  <!-- Folder not in database for test -->
+  <individual name="DA">
+    <one-of>
+      <item>DA</item>
+    </one-of>
+  </individual>
+
   <!-- <individual name="CurrentFolder">
     <one-of>
       <item>use current folder</item>
@@ -397,80 +480,263 @@
     </one-of>
   </individual>
 
+  <!-- Individual Authors first and last names -->
+  <individual name="NoAuthor">
+    <one-of>
+      <item>there is no additional authors</item>
+      <item>there is no additional author</item>
+      <item>no additional authors</item>
+      <item>no additional author</item>
+      <item>there is no second author</item>
+      <item>there is no third author</item>
+      <item>that is it</item>
+    </one-of>
+  </individual>
+  <individual name="PuhaiFrtAFName">
+    <one-of>
+      <item>Puhai</item>
+    </one-of>
+  </individual>
+  <individual name="PuhaiSndAFName">
+    <one-of>
+      <item>Puhai</item>
+    </one-of>
+  </individual>
+  <individual name="PuhaiTrdAFName">
+    <one-of>
+      <item>Puhai</item>
+    </one-of>
+  </individual>
+  <individual name="XianLingFrtAFName">
+    <one-of>
+      <item>Xian-Ling</item>
+    </one-of>
+  </individual>
+  <individual name="XianLingSndAFName">
+    <one-of>
+      <item>Xian-Ling</item>
+    </one-of>
+  </individual>
+  <individual name="XianLingTrdAFName">
+    <one-of>
+      <item>Xian-Ling</item>
+    </one-of>
+  </individual>
+  <individual name="TianFrtAFName">
+    <one-of>
+      <item>Tian</item>
+    </one-of>
+  </individual>
+  <individual name="TianSndAFName">
+    <one-of>
+      <item>Tian</item>
+    </one-of>
+  </individual>
+  <individual name="TianTrdAFName">
+    <one-of>
+      <item>Tian</item>
+    </one-of>
+  </individual>
+  <individual name="XianlingFrtAFName">
+    <one-of>
+      <item>Xianling</item>
+    </one-of>
+  </individual>
+  <individual name="XianlingSndAFName">
+    <one-of>
+      <item>Xianling</item>
+    </one-of>
+  </individual>
+  <individual name="XianlingTrdAFName">
+    <one-of>
+      <item>Xianling</item>
+    </one-of>
+  </individual>
+  <individual name="HeyanFrtAFName">
+    <one-of>
+      <item>Heyan</item>
+    </one-of>
+  </individual>
+  <individual name="HeyanSndAFName">
+    <one-of>
+      <item>Heyan</item>
+    </one-of>
+  </individual>
+  <individual name="HeyanTrdAFName">
+    <one-of>
+      <item>Heyan</item>
+    </one-of>
+  </individual>
+  <individual name="JulianaFrtAFName">
+    <one-of>
+      <item>Juliana</item>
+    </one-of>
+  </individual>
+  <individual name="JulianaSndAFName">
+    <one-of>
+      <item>Juliana</item>
+    </one-of>
+  </individual>
+  <individual name="JulianaTrdAFName">
+    <one-of>
+      <item>Juliana</item>
+    </one-of>
+  </individual>
+  <individual name="LouisaFrtAFName">
+    <one-of>
+      <item>Louisa</item>
+    </one-of>
+  </individual>
+  <individual name="LouisaSndAFName">
+    <one-of>
+      <item>Louisa</item>
+    </one-of>
+  </individual>
+  <individual name="LouisaTrdAFName">
+    <one-of>
+      <item>Louisa</item>
+    </one-of>
+  </individual>
+  <individual name="LanFrtALName">
+    <one-of>
+      <item>Lan</item>
+    </one-of>
+  </individual>
+  <individual name="LanSndALName">
+    <one-of>
+      <item>Lan</item>
+    </one-of>
+  </individual>
+  <individual name="LanTrdALName">
+    <one-of>
+      <item>Lan</item>
+    </one-of>
+  </individual>
+  <individual name="MaoFrtALName">
+    <one-of>
+      <item>Mao</item>
+    </one-of>
+  </individual>
+  <individual name="MaoSndALName">
+    <one-of>
+      <item>Mao</item>
+    </one-of>
+  </individual>
+  <individual name="MaoTrdALName">
+    <one-of>
+      <item>Mao</item>
+    </one-of>
+  </individual>
+  <individual name="HuangFrtALName">
+    <one-of>
+      <item>Huang</item>
+    </one-of>
+  </individual>
+  <individual name="HuangSndALName">
+    <one-of>
+      <item>Huang</item>
+    </one-of>
+  </individual>
+  <individual name="HuangTrdALName">
+    <one-of>
+      <item>Huang</item>
+    </one-of>
+  </individual>
+  <individual name="MiehleFrtALName">
+    <one-of>
+      <item>Miehle</item>
+    </one-of>
+  </individual>
+  <individual name="MiehleSndALName">
+    <one-of>
+      <item>Miehle</item>
+    </one-of>
+  </individual>
+  <individual name="MiehleTrdALName">
+    <one-of>
+      <item>Miehle</item>
+    </one-of>
+  </individual>
+  <individual name="PragstFrtALName">
+    <one-of>
+      <item>Pragst</item>
+    </one-of>
+  </individual>
+  <individual name="PragstSndALName">
+    <one-of>
+      <item>Pragst</item>
+    </one-of>
+  </individual>
+  <individual name="PragstTrdALName">
+    <one-of>
+      <item>Pragst</item>
+    </one-of>
+  </individual>
+  <individual name="YangFrtALName">
+    <one-of>
+      <item>Yang</item>
+    </one-of>
+  </individual>
+  <individual name="YangSndALName">
+    <one-of>
+      <item>Yang</item>
+    </one-of>
+  </individual>
+  <individual name="YangTrdALName">
+    <one-of>
+      <item>Yang</item>
+    </one-of>
+  </individual>
 
-  <individual name="FirstFirstName">
-    <one-of>
-      <item>Tian</item>
-      <item>Xianling</item>
-      <item>Heyan</item>
-      <item>Juliana</item>
-      <item>Louisa</item>
-      <item>Wolfgang</item>
-      <item>Stefan</item>
-    </one-of>
-  </individual>
-  <individual name="FirstLastName">
-    <one-of>
-      <item>Lan</item>
-      <item>Mao</item>
-      <item>Huang</item>
-      <item>Miehle</item>
-      <item>Pragst</item>
-      <item>Minker</item>
-      <item>Ultes</item>
-    </one-of>
-  </individual>
-  <individual name="SecondFirstName">
-    <one-of>
-      <item>Tian</item>
-      <item>Xianling</item>
-      <item>Heyan</item>
-      <item>Juliana</item>
-      <item>Louisa</item>
-      <item>Wolfgang</item>
-      <item>Stefan</item>
-    </one-of>
-  </individual>
-  <individual name="SecondLastName">
-    <one-of>
-      <item>Lan</item>
-      <item>Mao</item>
-      <item>Huang</item>
-      <item>Miehle</item>
-      <item>Pragst</item>
-      <item>Minker</item>
-      <item>Ultes</item>
-    </one-of>
-  </individual>
-  <individual name="ThirdFirstName">
-    <one-of>
-      <item>Tian</item>
-      <item>Xianling</item>
-      <item>Heyan</item>
-      <item>Juliana</item>
-      <item>Louisa</item>
-      <item>Wolfgang</item>
-      <item>Stefan</item>
-    </one-of>
-  </individual>
-  <individual name="ThirdLastName">
-    <one-of>
-      <item>Lan</item>
-      <item>Mao</item>
-      <item>Huang</item>
-      <item>Miehle</item>
-      <item>Pragst</item>
-      <item>Minker</item>
-      <item>Ultes</item>
-    </one-of>
-  </individual>
 
-  <individual name="TitleName">
+  <individual name="TitleNameOne">
     <one-of>
-      <item>Generative Dialog Policy for Task-oriented Dialog Systems</item>
-      <item>UniDS: A Unified Dialogue System for Chit-Chat and Task-oriented Dialogues</item>
+      <item>Dialogue System: A Brief Review</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameTwo">
+    <one-of>
       <item>Enabling Dialogue Management with Dynamically Created Dialogue Actions</item>
-      <item>Dialogue System%3A A Brief Review</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameThree">
+    <one-of>
+      <item>Generative Dialog Policy for Task oriented Dialog Systems</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameFour">
+    <one-of>
+      <item>UniDS: A Unified Dialogue System for Chit-Chat and Task-oriented Dialogues</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameFive">
+    <one-of>
+      <item>A Study on Dialogue Reward Prediction for Open-Ended Conversational Agents</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameSix">
+    <one-of>
+      <item>GRADE Automatic Graph-Enhanced Coherence Metric for Evaluating Open-Domain Dialogue Systems</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameSeven">
+    <one-of>
+      <item>Automatically Training a Problematic Dialogue Predictor for a Spoken Dialogue System</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameEight">
+    <one-of>
+      <item>Enabling Dialogue Management with Dynamically Created Dialogue Actions</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameNine">
+    <one-of>
+      <item>Comprehensive Study How the Context Information of Different Granularity Affects Dialogue State Tracking</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameTen">
+    <one-of>
+      <item>Dialogue as Discourse Controlling Global Properties of Scripted Dialogue</item>
     </one-of>
   </individual>
 

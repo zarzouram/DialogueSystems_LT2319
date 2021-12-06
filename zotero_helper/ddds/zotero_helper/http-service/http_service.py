@@ -58,9 +58,19 @@ header = {"accept": "application/json", "charset": "utf-8"}
 def word2num(num_str):
 
     mapping = {
-        "zero": "0", "one": "1", "two": "2", "three": "3",
-        "four": "4", "five": "5", "six": "6", "seven": "7",
-        "eight": "8", "nine": "9", "dot": ".", "v": "v"}
+        "zero": "0",
+        "one": "1",
+        "two": "2",
+        "three": "3",
+        "four": "4",
+        "five": "5",
+        "six": "6",
+        "seven": "7",
+        "eight": "8",
+        "nine": "9",
+        "dot": ".",
+        "v": "v"
+    }
     wrd_list = num_str.split(" ")
     num4wrd = "".join([mapping[x] for x in wrd_list])
 
@@ -245,7 +255,6 @@ def action_success_response():
 # assume that folder names are unique
 @app.route("/folder_id", methods=['POST'])
 def folder_id():
-    print("\n\nhere\n")
     payload = request.get_json()
     name = payload["request"]["parameters"]["folder_name"]
     current_id = SCORE_BOARD["folder"]["current"]
@@ -337,10 +346,7 @@ def items_num():
 
     count_num = count_records(item_type, folder)
 
-    # When to return grammar_entry and when not! This should not be drived by
-    # programming requerement! To interact with if/then statement the value
-    # should have the number, but if I return None in grammar_entry I got an
-    # buildig error.
+    # NOTE When to return grammar_entry and when not! see note on title
     print_data(["count_only", item_type, count_num])
     return query_response(value=str(count_num), grammar_entry=str(count_num))
 
@@ -429,19 +435,33 @@ def create_folder():
 @app.route("/title", methods=['POST'])
 def title():
     payload = request.get_json()
-    my_cite_info = payload["request"]["parameters"]["cite_info"]["grammar_entry"]
-    my_title = json.loads(my_cite_info)[0]["title"]
+    if "cite_info" in payload["context"]["facts"]:
+        my_cite_info = payload["context"]["facts"]["cite_info"]["grammar_entry"]
+        my_title = json.loads(my_cite_info)[0]["title"]
 
-    print_data(["title", type(my_title), my_cite_info])
+    else:
+        my_title = payload["context"]["facts"]["title"]["grammar_entry"]
+        # NOTE
+        # if I pass the value of the item_title individual, I got the following
+        # warning:
+        # {"event": "failed to generate system move", "grammar": ... "move":
+        # "Move(ask(?preconfirmed(AddItem, [item_title(TitleNameThree) ...
+        # and the system cannot <preconfirm action="AddItem" related to
+        # preconfirm="interrogative"
 
-    return query_response(value="tilte", grammar_entry=my_title)
+        # my_title_v = payload["context"]["facts"]["title"]["value"]
+
+    my_title_v = "tilte"
+    print_data(["title", my_title_v, my_title])
+    return query_response(value=my_title_v, grammar_entry=my_title)
 
 
 # rfolder status
 @app.route("/folder_status", methods=['POST'])
 def folder_status():
-    # payload = request.get_json()
-    print_data(["folder_status"])
+    payload = request.get_json()
+
+    print_data(["folder_status", payload["context"]["facts"]["item_title"]])
 
     return query_response(value="ncreated", grammar_entry="ncreated")
 
@@ -459,25 +479,58 @@ def authors():
     return query_response(value="None", grammar_entry=authors)
 
 
+# return auif the user have an additional auther to enter
+@app.route("/next_author", methods=['POST'])
+def next_author():
+    payload = request.get_json()
+    next_auther_status = payload["request"]["parameters"]
+    if next_auther_status["third_first_name"]:
+        next_ = next_auther_status["third_first_name"]["value"]
+    else:
+        next_ = next_auther_status["second_first_name"]["value"]
+
+    if next_ != "NoAuthor":
+        next_ = "next"
+
+    print_data(["next_author", next_auther_status, next_])
+
+    return query_response(value=next_, grammar_entry=next_)
+
+
 # create item
 @app.route("/create_item", methods=['POST'])
 def create_item():
     payload = request.get_json()
-    # data2print = []
-    # status = payload["request"]["parameters"]
-    # for s in status:
-    #     data2print.append({f"request_{s}_grammar_entry": status[s]["grammar_entry"]})
-    #     data2print.append({f"request_{s}_value        ": status[s]["value"]})
-
-    # status = payload["context"]["facts"]
-    # for s in status:
-    #     data2print.append({f"facts_{s}_grammar_entry  ": status[s]["grammar_entry"]})
-    #     data2print.append({f"facts_{s}_value          ": status[s]["value"]})
-    # print_data(["create_item", *data2print])
-    item = payload["context"]["facts"]["cite_info"]["grammar_entry"]
+    al = [
+        "first_first_name", "first_last_name", "second_first_name", "second_last_name", "third_first_name",
+        "third_last_name"
+    ]
     dist = payload["context"]["facts"]["folder_id_dist"]["value"]
-    zotero_dict = json.loads(item)
-    item_type = zotero_dict[0]["itemType"]
+
+    if "cite_info" in payload["context"]["facts"]:
+        item = payload["context"]["facts"]["cite_info"]["grammar_entry"]
+        zotero_dict = json.loads(item)
+        item_type = zotero_dict[0]["itemType"]
+        item_temp = zot.item_template(item_type)
+        for k in item_temp:
+            if k in zotero_dict[0]:
+                item_temp[k] = zotero_dict[0][k]
+    else:
+        item_type = payload["context"]["facts"]["type"]["value"]
+        item_temp = zot.item_template(item_type)
+        item_temp["itemType"] = item_type
+        item_temp["title"] = payload["context"]["facts"]["item_title"]["grammar_entry"]
+        authors_list = []
+        for a in range(0, 6, 2):
+            if al[a] in payload["context"]["facts"] and al[a + 1] in payload["context"]["facts"]:
+                if payload["context"]["facts"][al[a]]:
+                    firstname = payload["context"]["facts"][al[a]]["grammar_entry"]
+                    lastname = payload["context"]["facts"][al[a + 1]]["grammar_entry"]
+                    authors_list.append({"firstName": firstname, "lastName": lastname, "creatorType": "author"})
+                else:
+                    break
+        item_temp["creators"] = authors_list
+
     if dist == "noid":
         folder_name = payload["context"]["facts"]["folder_name"]["grammar_entry"]
         folder_list = zot.all_collections()
@@ -485,32 +538,14 @@ def create_item():
             if folder["data"]["name"] == folder_name:
                 id_folder = folder["key"]  # requested folder found
                 break
-        item_temp = zot.item_template(item_type)
-        for k in item_temp:
-            if k in zotero_dict[0]:
-                item_temp[k] = zotero_dict[0][k]
-            item_temp["collections"] = [id_folder]
-        print(item_temp)
-        _feedback = zot.create_items([item_temp])  # noqa: F841
+        item_temp["collections"] = [id_folder]
 
-    elif dist == "home":
-        _feedback = zot.create_items(zotero_dict)  # noqa: F841
+    elif dist != "home":
+        item_temp["collections"] = [dist]
 
-    else:
-        item_temp = zot.item_template(item_type)
-        for k in item_temp:
-            if k in zotero_dict[0]:
-                item_temp[k] = zotero_dict[0][k]
-            item_temp["collections"] = [dist]
+    _feedback = zot.create_items([item_temp])  # noqa: F841
 
-        _feedback = zot.create_items([item_temp])  # noqa: F841
-        # _feedback = zot.addto_collection(dist, item_temp)  # noqa: F841
-
-    if "folder" in payload["context"]["facts"]:
-        f = payload["context"]["facts"]["folder"]["value"]
-    else:
-        f = None
-    print_data(["add", _feedback, f])
+    print_data(["add", _feedback])
     return action_success_response()
 
 
@@ -521,6 +556,15 @@ def debug():
 
     # print_data(["debug", item_type])
     return query_response(value=None, grammar_entry="d")
+
+
+# create folder
+@app.route("/dummy", methods=['POST'])
+def dummy():
+    # payload = request.get_json()
+
+    print_data(["dummy"])
+    return action_success_response()
 
 
 def print_data(data):

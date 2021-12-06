@@ -58,7 +58,7 @@
       <invoke_service_query predicate="item_identifier_url" type="wh_question"/>
       <invoke_service_query predicate="cite_info" type="wh_question"/>
       <invoke_service_query predicate="item_title" type="wh_question"/>
-
+      <!-- find destination folder -->
       <findout type="wh_question" predicate="folder_name"/>
       <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
       <if>
@@ -78,7 +78,7 @@
           <if>
             <condition>
               <!-- current folder is not known by the system ask for the folder
-              not implemented-->
+              **not implemented**-->
               <proposition predicate="folder_id_dist" value="0"/>
             </condition>
             <then>
@@ -91,7 +91,7 @@
             </then>
             <else>
               <invoke_service_query predicate="folder" type="wh_question"/>
-              <invoke_service_action name="AddIdentifier"
+              <invoke_service_action name="AddItem"
               preconfirm="interrogative" postconfirm="true"/>
             </else>
           </if>
@@ -106,7 +106,7 @@
         <then>
           <forget predicate="folder_id_dist"/>
           <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
-          <invoke_service_action name="AddIdentifier" preconfirm="interrogative" postconfirm="true"/>
+          <invoke_service_action name="AddItem" preconfirm="interrogative" postconfirm="true"/>
         </then>
         <!-- <else>
           <invoke_service_action name="Dummy" postconfirm="false"/>
@@ -118,12 +118,62 @@
   <!-- Not impelemented -->
   <goal type="perform" action="add_manually">
     <plan>
+      <!-- If I used findout item_title, findout type excutes "invoke_service_query predicate="item_title"" !!!!  -->
       <findout type="wh_question" predicate="type"/>
       <findout type="wh_question" predicate="title"/>
-      <findout type="wh_question" predicate="authors"/>
-      <invoke_service_action name="Dummy" postconfirm="true"/>
+      <invoke_service_query predicate="item_title" type="wh_question"/>
+      <!-- find authors, get first author, then find the second, then the third -->
+      <findout type="wh_question" predicate="first_first_name"/>
+      <findout type="wh_question" predicate="first_last_name"/>
+      <raise type="wh_question" predicate="second_first_name"/>
+      <invoke_service_query predicate="next_author" type="wh_question"/>
+      <if>
+        <condition>
+          <proposition predicate="next_author" value="next"/>
+        </condition>
+        <then>
+          <forget predicate="next_author"/>
+          <findout type="wh_question" predicate="second_last_name"/>
+          <raise type="wh_question" predicate="third_first_name"/>
+          <invoke_service_query predicate="next_author" type="wh_question"/>
+          <if>
+            <condition>
+              <proposition predicate="next_author" value="next"/>
+            </condition>
+            <then>
+              <findout type="wh_question" predicate="third_last_name"/>
+            </then>
+          </if>
+        </then>
+      </if>
+      <!-- find destination folder -->
+      <findout type="wh_question" predicate="folder_name"/>
+      <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+      <if>
+        <condition>
+          <!-- requested folder not found create folder -->
+          <proposition predicate="folder_id_dist" value="noid"/>
+        </condition>
+        <then>
+          <invoke_service_action name="CreateFolder" preconfirm="interrogative"
+          postconfirm="true"/>
+        </then>
+        <else>
+          <invoke_service_action name="AddItem" preconfirm="interrogative" postconfirm="true"/>
+        </else>
+      </if>
     </plan>
+    <postplan>
+      <invoke_service_action name="AddItem" preconfirm="interrogative" postconfirm="true"/>
+    </postplan>
   </goal>
+
+  <!-- <parameters question_type="wh_question" predicate="authors"
+  graphical_type="list" source="domain" incremental="true"
+  max_reported_hit_count="1">
+    <ask_feature predicate="first_first_name"/>
+    <ask_feature predicate="first_last_name"/>
+  </parameters> -->
 
 
   <!-- count -->

@@ -6,6 +6,7 @@
     <action name="add_by_identfier"/>
     <action name="add_manually"/>
 
+
     <!-- ******* Custom sorts  *******-->
     <sort name="debug_step" dynamic="true"/>
 
@@ -22,7 +23,10 @@
 
     <sort name="item_info" dynamic="true"/>
     <sort name="item_title_info" dynamic="true"/>
+
     <sort name="authors_info" dynamic="true"/>
+    <sort name="first_name" dynamic="true"/>
+    <sort name="last_name" dynamic="true"/>
 
     <sort name="service_info"/>
 
@@ -50,14 +54,15 @@
 
     <predicate name="title" sort="item_title_info"/>
     <predicate name="authors" sort="authors_info"/>
-    <predicate name="first_first_name" sort="authors_info"/>
-    <predicate name="first_last_name" sort="authors_info"/>
-    <predicate name="second_first_name" sort="authors_info"/>
-    <predicate name="second_last_name" sort="authors_info"/>
-    <predicate name="third_first_name" sort="authors_info"/>
-    <predicate name="third_last_name" sort="authors_info"/>
+    <predicate name="next_author" sort="authors_info"/>
+    <predicate name="first_first_name" sort="first_name" feature_of="authors"/>
+    <predicate name="first_last_name" sort="last_name" feature_of="authors"/>
+    <predicate name="second_first_name" sort="first_name" feature_of="authors"/>
+    <predicate name="second_last_name" sort="last_name" feature_of="authors"/>
+    <predicate name="third_first_name" sort="first_name" feature_of="authors"/>
+    <predicate name="third_last_name" sort="last_name" feature_of="authors"/>
 
-    <predicate name="confirm_add" sort="service_info"/>
+    <predicate name="confirm_add" sort="service_info" />
 
     <!-- ******* Individual ******* -->
     <!-- item type -->
@@ -73,6 +78,7 @@
     <individual name="LibraryFolder" sort="folder_nm_str"/>
     <individual name="TO" sort="folder_nm_str"/>
     <individual name="DM" sort="folder_nm_str"/>
+    <individual name="DA" sort="folder_nm_str"/>
 
     <individual name="ArxivIdentifierReview1" sort="item_info"/>
     <individual name="ArxivIdentifierReview2" sort="item_info"/>
@@ -81,13 +87,56 @@
     <individual name="ArxivIdentifierTOD2" sort="item_info"/>
     <individual name="ArxivIdentifierDM" sort="item_info"/>
 
-    <individual name="FirstFirstName" sort="authors_info"/>
-    <individual name="FirstLastName" sort="authors_info"/>
-    <individual name="SecondFirstName" sort="authors_info"/>
-    <individual name="SecondLastName" sort="authors_info"/>
-    <individual name="ThirdFirstName" sort="authors_info"/>
-    <individual name="ThirdLastName" sort="authors_info"/>
 
-    <individual name="TitleName" sort="item_title_info"/>
+    <individual name="NoAuthor" sort="first_name"/>
+    <individual name="PuhaiFrtAFName" sort="first_name"/>
+    <individual name="PuhaiSndAFName" sort="first_name"/>
+    <individual name="PuhaiTrdAFName" sort="first_name"/>
+    <individual name="XianLingFrtAFName" sort="first_name"/>
+    <individual name="XianLingSndAFName" sort="first_name"/>
+    <individual name="XianLingTrdAFName" sort="first_name"/>
+    <individual name="TianFrtAFName" sort="first_name"/>
+    <individual name="TianSndAFName" sort="first_name"/>
+    <individual name="TianTrdAFName" sort="first_name"/>
+    <individual name="XianlingFrtAFName" sort="first_name"/>
+    <individual name="XianlingSndAFName" sort="first_name"/>
+    <individual name="XianlingTrdAFName" sort="first_name"/>
+    <individual name="HeyanFrtAFName" sort="first_name"/>
+    <individual name="HeyanSndAFName" sort="first_name"/>
+    <individual name="HeyanTrdAFName" sort="first_name"/>
+    <individual name="JulianaFrtAFName" sort="first_name"/>
+    <individual name="JulianaSndAFName" sort="first_name"/>
+    <individual name="JulianaTrdAFName" sort="first_name"/>
+    <individual name="LouisaFrtAFName" sort="first_name"/>
+    <individual name="LouisaSndAFName" sort="first_name"/>
+    <individual name="LouisaTrdAFName" sort="first_name"/>
+    <individual name="LanFrtALName" sort="last_name"/>
+    <individual name="LanSndALName" sort="last_name"/>
+    <individual name="LanTrdALName" sort="last_name"/>
+    <individual name="MaoFrtALName" sort="last_name"/>
+    <individual name="MaoSndALName" sort="last_name"/>
+    <individual name="MaoTrdALName" sort="last_name"/>
+    <individual name="HuangFrtALName" sort="last_name"/>
+    <individual name="HuangSndALName" sort="last_name"/>
+    <individual name="HuangTrdALName" sort="last_name"/>
+    <individual name="MiehleFrtALName" sort="last_name"/>
+    <individual name="MiehleSndALName" sort="last_name"/>
+    <individual name="MiehleTrdALName" sort="last_name"/>
+    <individual name="PragstFrtALName" sort="last_name"/>
+    <individual name="PragstSndALName" sort="last_name"/>
+    <individual name="PragstTrdALName" sort="last_name"/>
+    <individual name="YangFrtALName" sort="last_name"/>
+    <individual name="YangSndALName" sort="last_name"/>
+    <individual name="YangTrdALName" sort="last_name"/>
 
+    <individual name="TitleNameOne" sort="item_title_info"/>
+    <individual name="TitleNameTwo" sort="item_title_info"/>
+    <individual name="TitleNameThree" sort="item_title_info"/>
+    <individual name="TitleNameFour" sort="item_title_info"/>
+    <individual name="TitleNameFive" sort="item_title_info"/>
+    <individual name="TitleNameSix" sort="item_title_info"/>
+    <individual name="TitleNameSeven" sort="item_title_info"/>
+    <individual name="TitleNameEight" sort="item_title_info"/>
+    <individual name="TitleNameNine" sort="item_title_info"/>
+    <individual name="TitleNameTen" sort="item_title_info"/>
 </ontology>
