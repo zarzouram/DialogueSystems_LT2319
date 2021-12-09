@@ -156,6 +156,7 @@
   <action name="AddItem">
     <parameters>
       <parameter predicate="item_title" format="grammar_entry" />
+      <parameter predicate="folder_name" format="grammar_entry" />
     </parameters>
     <!-- <parameters/> -->
     <failure_reasons/>

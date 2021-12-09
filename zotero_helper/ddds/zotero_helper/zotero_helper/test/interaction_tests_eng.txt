@@ -1,7 +1,77 @@
---- 01-main menu
+--- 00-main menu
 S> What would you like to do?
 
---- 02-add_identifier.01: multimodal-incremental
+--- 01-count: general count
+S> What would you like to do?
+U> How many items do I have
+S> You have * records
+
+--- 02-count: articles count
+S> What would you like to do?
+U> How many journal articles do I have
+S> You have * journal articles
+
+--- 03-count: webpage count
+S> What would you like to do?
+U> How many web pages do I have
+S> You have * webpage
+
+--- 04-count: papers count
+S> What would you like to do?
+U> How many papers do I have
+S> You have * conference papers
+
+--- 05-count: count items under a folder
+S> What would you like to do?
+U> how many items do you have under Knowlwdge Graph
+S> You have * records
+
+--- 06-count: count webpage under a folder
+S> What would you like to do?
+U> how many web pages do you have under Knowlwdge Graph
+S> You have * webpage
+
+--- 07-count: count articles under a folder
+S> What would you like to do?
+U> how many articles do you have under Knowlwdge Graph
+S> You have * journal articles
+
+--- 08-count: count papers under a folder
+S> What would you like to do?
+U> how many papers do you have under Knowlwdge Graph
+S> You have * conference paper
+
+--- 09-count: count items under an empty folder
+S> What would you like to do?
+U> how many items do you have under NLU
+S> You do not have any records
+
+--- 10-count: count webpages under an empty folder
+S> What would you like to do?
+U> how many web pages do you have under NLU
+S> You do not have any webpages
+
+--- 11-count: count articles under an empty folder
+S> What would you like to do?
+U> how many articles do you have under NLU
+S> You do not have any journal articles
+
+--- 12-count: count items under nonexisting folder
+S> What would you like to do?
+U> how many items do you have under AI
+S> Sorry, I can not find any folder named AI
+
+--- 13-count: count webpages under an empty folder
+S> What would you like to do?
+U> how many web pages do you have under AI
+S> Sorry, I can not find any folder named AI
+
+--- 14-count: count articles under an empty folder
+S> What would you like to do?
+U> how many articles do you have under AI
+S> Sorry, I can not find any folder named AI
+
+--- 15-add_identifier: multimodal-incremental
 S> What would you like to do?
 U> add an item
 S> Do you want to add an item by identfier or add an item manually?
@@ -14,7 +84,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 03-add_identifier.02: incremental
+--- 16-add_identifier: incremental
 S> What would you like to do?
 U> add an item by identfier
 S> What identifier?
@@ -25,7 +95,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 04-add_identifier.03: Overanswering-identifier
+--- 17-add_identifier: Overanswering-identifier
 S> What would you like to do?
 U> add one nine zero nine dot zero nine four eight four v one
 S> Select a distination folder?
@@ -38,7 +108,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 05-add_identifier.04: Overanswering-folder
+--- 18-add_identifier: Overanswering-folder
 S> What would you like to do?
 U> add an item to Task Oriented
 S> What identifier?
@@ -47,14 +117,14 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 06-add_identifier.05: oneshot-existing folder
+--- 19-add_identifier: oneshot-existing folder
 S> What would you like to do?
 U> add two one zero three dot zero three one two five v two to the reviews folder
 S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 07-add_identifier.06: oneshot-nonexisting folder
+--- 20-add_identifier: oneshot-nonexisting folder
 S> What would you like to do?
 U> add one nine zero seven dot zero zero six eight four v one to my DM folder
 S> Do you want to create DM?
@@ -65,7 +135,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 08-add_manually.01: multimodal-incremental-existing folder
+--- 21-add_manually: multimodal-incremental-existing folder
 S> What would you like to do?
 U> add an item
 S> Do you want to add an item by identfier or add an item manually?
@@ -86,7 +156,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 09-add_manually.02: multimodal-incremental-library
+--- 22-add_manually: multimodal-incremental-library
 S> What would you like to do?
 U> add an item
 S> Do you want to add an item by identfier or add an item manually?
@@ -111,7 +181,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 10-add_manually.03: Overanswering-title
+--- 23-add_manually: Overanswering-title
 S> What would you like to do?
 U> add Automatically Training a Problematic Dialogue Predictor for a Spoken Dialogue System
 S> What is the item type?
@@ -128,7 +198,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 11-add_manually.04: Overanswering-title-folder-nonexisting folder
+--- 24-add_manually: Overanswering-title-folder-nonexisting folder
 S> What would you like to do?
 U> add Enabling Dialogue Management with Dynamically Created Dialogue Actions to DA
 S> What is the item type?
@@ -153,7 +223,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 12-add_manually.05: Overanswering-type-title-folder-existing folder
+--- 25-add_manually: Overanswering-type-title-folder-existing folder
 S> What would you like to do?
 U> add a journal article titled Comprehensive Study How the Context Information of Different Granularity Affects Dialogue State Tracking to reviews
 S> What is the first author's first name?
@@ -172,7 +242,7 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 13-add_manually.06: Overanswering-type-title-one author-firstName-lastName
+--- 26-add_manually: Overanswering-type-title-one author-firstName-lastName
 S> What would you like to do?
 U> add a journal article titled Dialogue as Discourse Controlling Global Properties of Scripted Dialogue authored by Xianling Lan
 S> What is the second author's first name?
@@ -183,72 +253,68 @@ S> Do you want to add *
 U> yes
 S> Succssefully added *
 
---- 14-count.01: general count
+--- 27-add_manually: Overanswering-title-two authors-firstName-lastName
 S> What would you like to do?
+U> add End to End Optimization of Task Oriented Dialogue Model with Deep Reinforcement Learning authored by Xianling Pragst and Heyan Huang
+S> What is the item type?
+U> journal article
+S> What is the third author's first name?
+U> there is no third author
+S> Select a distination folder?
+U> Task Oriented
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 28-add_manually: Overanswering-type-one author-firstName-lastName
+S> What would you like to do?
+U> add a journal article authored by Xianling Mao to my library
+S> What is the item title?
+U> A Robust and Efficient Three Layered Dialogue Component for a Speech-to-Speech Translation System
+S> What is the second author's first name?
+U> no additional authors
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+
+--- 29-changing topic-from manuall add-to general count
+S> What would you like to do?
+U> add a journal article titled Knowing What You Know Calibrating Dialogue Belief State Distributions via Ensembles authored by Xianling Lan
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
 U> How many items do I have
 S> You have * records
+U>
+S> Returning to add an item manually. Select a distination folder?
+U> my library
+S> Do you want to add *
+U> yes
+S> Succssefully added *
 
---- 15-count.02: articles count
+--- 30-changing topic-from manuall add-to folder count
 S> What would you like to do?
-U> How many journal articles do I have
-S> You have * journal articles
+U> add a journal article titled Goal Embedded Dual Hierarchical Model for Task Oriented Dialogue Generation by Xianling Lan
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
+U> how many items do you have under Task Oriented
+S> You have *
+U>
+S> Returning to add an item manually. Select a distination folder?
+U> Task oriented
+S> Do you want to add *
+U> yes
+S> Succssefully added *
 
---- 16-count.03: webpage count
+--- 31-changing topic-from identifier add-to general count
 S> What would you like to do?
-U> How many web pages do I have
-S> You have * webpage
-
---- 17-count.04: papers count
-S> What would you like to do?
-U> How many papers do I have
-S> You have * conference papers
-
---- 18-count.05: count items under a folder
-S> What would you like to do?
-U> how many items do you have under Knowlwdge Graph
-S> You have * records
-
---- 19-count.06: count webpage under a folder
-S> What would you like to do?
-U> how many web pages do you have under Knowlwdge Graph
-S> You have * webpage
-
---- 20-count.07: count articles under a folder
-S> What would you like to do?
-U> how many articles do you have under Knowlwdge Graph
-S> You have * journal articles
-
---- 21-count.08: count papers under a folder
-S> What would you like to do?
-U> how many papers do you have under Knowlwdge Graph
-S> You have * conference paper
-
---- 22-count.09: count items under an empty folder
-S> What would you like to do?
+U> add one nine zero nine dot zero nine four eight four v one
+S> Select a distination folder?
 U> how many items do you have under NLU
 S> You do not have any records
-
---- 23-ount.10: count webpages under an empty folder
-S> What would you like to do?
-U> how many web pages do you have under NLU
-S> You do not have any webpages
-
---- 24-count.11: count articles under an empty folder
-S> What would you like to do?
-U> how many articles do you have under NLU
-S> You do not have any journal articles
-
---- 25-count.12: count items under nonexisting folder
-S> What would you like to do?
-U> how many items do you have under AI
-S> Sorry, I can not find any folder named AI
-
---- 26-count.10: count webpages under an empty folder
-S> What would you like to do?
-U> how many web pages do you have under AI
-S> Sorry, I can not find any folder named AI
-
---- 27-count.11: count articles under an empty folder
-S> What would you like to do?
-U> how many articles do you have under AI
-S> Sorry, I can not find any folder named AI
+U>
+S> Returning to add an item by identfier. Select a distination folder?
+U> NLU
+S> Do you want to add Generative Dialog Policy for Task-oriented Dialog Systems to NLU?
+U> cancel

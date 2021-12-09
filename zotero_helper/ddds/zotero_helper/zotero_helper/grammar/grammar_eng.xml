@@ -10,6 +10,7 @@
       <item>forget it</item>
       <item>never mind</item>
       <item>abort</item>
+      <item>no</item>
     </one-of>
   </action>
 
@@ -67,44 +68,65 @@
         add <slot predicate="title"/>
       </item>
       <item>
-        add a <slot predicate="type"/>
+        add a <slot predicate="typetwo"/>
       </item>
 
       <item>
         add <slot predicate="title"/> to <slot predicate="folder_name"/>
       </item>
       <item>
-        add a <slot predicate="type"/> to <slot predicate="folder_name"/>
+        add a <slot predicate="typetwo"/> to <slot predicate="folder_name"/>
       </item>
       <item>
-        add a <slot predicate="type"/> titled <slot predicate="title"/>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/>
       </item>
 
       <item>
-        add a <slot predicate="type"/> titled <slot predicate="title"/> to <slot predicate="folder_name"/>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/> to <slot predicate="folder_name"/>
       </item>
       <item>
-        add a <slot predicate="type"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+        add a <slot predicate="typetwo"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
+      <item>
+        add a <slot predicate="typetwo"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
       </item>
       <item>
         add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
       </item>
+      <item>
+        add <slot predicate="title"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
 
       <item>
-        add a <slot predicate="type"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>  to <slot predicate="folder_name"/>
+        add a <slot predicate="typetwo"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>  to <slot predicate="folder_name"/>
       </item>
       <item>
-        add a <slot predicate="type"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+        add a <slot predicate="typetwo"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>  to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
+      </item>
+      <item>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/>
       </item>
       <item>
         add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add <slot predicate="title"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
       </item>
 
       <item>
         add <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> and <slot predicate="second_first_name"/> <slot predicate="second_last_name"/>
       </item>
       <item>
-        add a <slot predicate="type"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
+        add <slot predicate="title"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> and <slot predicate="second_first_name"/> <slot predicate="second_last_name"/>
+      </item>
+      <item>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/> authored by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
+      </item>
+      <item>
+        add a <slot predicate="typetwo"/> titled <slot predicate="title"/> by <slot predicate="first_first_name"/> <slot predicate="first_last_name"/> to <slot predicate="folder_name"/>
       </item>
 
     </one-of>
@@ -236,10 +258,10 @@
     </one-of>
   </answer>
 
-  <answer speaker="user" predicate="type">
+  <answer speaker="user" predicate="typetwo">
     <one-of>
-      <item><slot predicate="type" type="individual"/></item>
-      <item>the type is <slot predicate="type" type="individual"/></item>
+      <item><slot predicate="typetwo" type="individual"/></item>
+      <item>the type is <slot predicate="typetwo" type="individual"/></item>
     </one-of>
   </answer>
 
@@ -259,7 +281,7 @@
     Select a distination folder
   </question>
 
-  <question speaker="system" predicate="type" type="wh_question">
+  <question speaker="system" predicate="typetwo" type="wh_question">
     what is the item type
   </question>
 
@@ -289,10 +311,6 @@
 
   <question speaker="system" predicate="third_last_name" type="wh_question">
     what is the third author's last name
-  </question>
-
-  <question speaker="system" predicate="authors" type="wh_question">
-    d
   </question>
 
 
@@ -333,7 +351,7 @@
 
   <!-- ************** Preconfirms ************** -->
   <preconfirm action="AddItem">
-    add <slot predicate="item_title" type="individual"/>
+    add <slot predicate="item_title" type="individual"/> to <slot predicate="folder_name" type="individual"/>
   </preconfirm>
 
   <preconfirm action="CreateFolder">
@@ -440,6 +458,7 @@
     <one-of>
       <item>library</item>
       <item>my library</item>
+      <item>the library</item>
     </one-of>
   </individual>
 
@@ -737,6 +756,26 @@
   <individual name="TitleNameTen">
     <one-of>
       <item>Dialogue as Discourse Controlling Global Properties of Scripted Dialogue</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameEleven">
+    <one-of>
+      <item>End to End Optimization of Task Oriented Dialogue Model with Deep Reinforcement Learning</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameTwelve">
+    <one-of>
+      <item>A Robust and Efficient Three Layered Dialogue Component for a Speech-to-Speech Translation System</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameThirteen">
+    <one-of>
+      <item>Goal Embedded Dual Hierarchical Model for Task Oriented Dialogue Generation</item>
+    </one-of>
+  </individual>
+  <individual name="TitleNameFourteen">
+    <one-of>
+      <item>Knowing What You Know Calibrating Dialogue Belief State Distributions via Ensembles</item>
     </one-of>
   </individual>
 

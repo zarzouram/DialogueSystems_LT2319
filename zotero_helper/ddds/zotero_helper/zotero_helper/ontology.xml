@@ -38,11 +38,13 @@
     <predicate name="count_int" sort="the_count"/>
 
     <predicate name="type" sort="record_type"/>
+    <predicate name="typetwo" sort="record_type"/>
     <predicate name="check_type" sort="query_type"/>
 
     <predicate name="folder" sort="folder_info"/>
     <!-- <predicate name="folder" sort="string"/> -->
     <predicate name="folder_name" sort="folder_nm_str"/>
+    <predicate name="folder_name_two" sort="folder_nm_str"/>
     <predicate name="folder_id" sort="folder_id_str"/>
     <predicate name="folder_id_dist" sort="folder_id_str"/>
 
@@ -73,7 +75,6 @@
     <individual name="KnowlwdgeGraph" sort="folder_nm_str"/>
     <individual name="NLU" sort="folder_nm_str"/>
     <individual name="AI" sort="folder_nm_str"/>
-    <!-- <individual name="CurrentFolder" sort="folder_nm_str"/> -->
     <individual name="Review" sort="folder_nm_str"/>
     <individual name="LibraryFolder" sort="folder_nm_str"/>
     <individual name="TO" sort="folder_nm_str"/>
@@ -86,7 +87,6 @@
     <individual name="ArxivIdentifierTOD1" sort="item_info"/>
     <individual name="ArxivIdentifierTOD2" sort="item_info"/>
     <individual name="ArxivIdentifierDM" sort="item_info"/>
-
 
     <individual name="NoAuthor" sort="first_name"/>
     <individual name="PuhaiFrtAFName" sort="first_name"/>
@@ -139,4 +139,8 @@
     <individual name="TitleNameEight" sort="item_title_info"/>
     <individual name="TitleNameNine" sort="item_title_info"/>
     <individual name="TitleNameTen" sort="item_title_info"/>
+    <individual name="TitleNameEleven" sort="item_title_info"/>
+    <individual name="TitleNameTwelve" sort="item_title_info"/>
+    <individual name="TitleNameThirteen" sort="item_title_info"/>
+    <individual name="TitleNameFourteen" sort="item_title_info"/>
 </ontology>

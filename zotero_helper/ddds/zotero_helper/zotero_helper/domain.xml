@@ -119,7 +119,7 @@
   <goal type="perform" action="add_manually">
     <plan>
       <!-- If I used findout item_title, findout type excutes "invoke_service_query predicate="item_title"" !!!!  -->
-      <findout type="wh_question" predicate="type"/>
+      <findout type="wh_question" predicate="typetwo"/>
       <findout type="wh_question" predicate="title"/>
       <invoke_service_query predicate="item_title" type="wh_question"/>
       <!-- find authors, get first author, then find the second, then the third -->
@@ -189,6 +189,7 @@
         </condition>
         <then>
           <invoke_service_action name="ReportFolderFail" postconfirm="true"/>
+          <forget predicate="folder_name"/>
         </then>
         <else>
           <!-- <invoke_service_query> does not return multiple variables    -->
@@ -209,14 +210,19 @@
             will need to more action reports and a nested if statement -->
             <then>
               <invoke_service_action name="ReportEmpty" postconfirm="true"/>
+              <forget predicate="folder_name"/>
             </then>
             <else>
               <invoke_service_action name="ReportCount" postconfirm="true"/>
+              <forget predicate="folder_name"/>
             </else>
           </if>
         </else>
       </if>
     </plan>
+    <!-- <postplan>
+      <forget predicate="folder_name"/>
+    </postplan> -->
   </goal>
 
   <!-- <parameters predicate="authors">

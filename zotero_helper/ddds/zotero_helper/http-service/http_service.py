@@ -516,7 +516,7 @@ def create_item():
             if k in zotero_dict[0]:
                 item_temp[k] = zotero_dict[0][k]
     else:
-        item_type = payload["context"]["facts"]["type"]["value"]
+        item_type = payload["context"]["facts"]["typetwo"]["value"]
         item_temp = zot.item_template(item_type)
         item_temp["itemType"] = item_type
         item_temp["title"] = payload["context"]["facts"]["item_title"]["grammar_entry"]
