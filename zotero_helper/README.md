@@ -6,8 +6,14 @@
   - [2.2. Wikimedia REST API](#22-wikimedia-rest-api)
 - [3. Data collection](#3-data-collection)
   - [3.1. Scenario](#31-scenario)
-  - [3.2. Collected material: overview, some examples](#32-collected-material-overview-some-examples)
-  - [3.3. Distillation and analysis results](#33-distillation-and-analysis-results)
+    - [3.1.1. Add items manually](#311-add-items-manually)
+    - [3.1.2. Add items using arXiv identifier](#312-add-items-using-arxiv-identifier)
+    - [3.1.3. Query number of items](#313-query-number-of-items)
+  - [3.2. Collected material](#32-collected-material)
+    - [3.2.1. Add items manually](#321-add-items-manually)
+    - [3.2.2. Add items using arXiv identifier](#322-add-items-using-arxiv-identifier)
+    - [3.2.3. Query number of items](#323-query-number-of-items)
+  - [3.3. Distillation](#33-distillation)
 - [4. Implementation](#4-implementation)
 - [5. Sample dialogues handled](#5-sample-dialogues-handled)
 - [6. Discussion](#6-discussion)
@@ -60,17 +66,103 @@ Wikimedia API change the endpoint of `<query name="cite_info">` to
 
 ## 3. Data collection
 
-text
+The project idea is to interface with reference management software. Because
+the project idea is to interact with a program, I think the best way to build a
+dialogues corpus is to use a Wizard of Oz [[3]](#3). However, it is hard to
+implement such a methodology in this project. I will collect the data by
+transcribing several dialogues between two human participants; one plays the
+software role.
 
 ### 3.1. Scenario
 
-text
+As discussed in [section 3](#3-data-collection), the data collection will be
+through role play. As [Pyzotero](#21-pyzotero) is the main API, I have set up
+the dialogues scenario based on the methods provided and the data required by
+the API. The planned secnario will as follows:
 
-### 3.2. Collected material: overview, some examples
+#### 3.1.1. Add items manually
 
-text
+The user initiates the required task by expressing their intent to add an item
+manually, i.e., by specifying the information for each item field, such as item
+type, title, authors, etc. Because there are many fields (for example, a
+journal article has 23 fields), in my project, the user will specify only four
+fields: item type, title, authors, and folder. The specified by the user folder
+may not exist in the database. If this is the case, the program should offer to
+create a new folder for the user and add the item afterward.
 
-### 3.3. Distillation and analysis results
+#### 3.1.2. Add items using arXiv identifier
+
+The user initiates the required task by expressing their intent to add an item
+by specifing the arXiv identifier and destination folder. The specified by the
+user folder may not exist in the database. If this is the case, the program
+should offer to create a new folder for the user and add the item afterward.
+
+#### 3.1.3. Query number of items
+
+The user initiates the required task by requesting the system to count the
+number of items. The user can specify a specific folder or item type or both of
+them.
+
+### 3.2. Collected material
+
+#### 3.2.1. Add items manually
+
+> S> Wellcome to the Zotero helper. What would you like to achieve today?
+>
+> U> I want to add an item with the title [aaah PAUSE aaa] A Study on Dialogue
+>    Reward Prediction for Open-Ended Conversational Agents.
+>
+> S> Ok, good [mmm]. What is the item type?
+>
+> U> journal article
+>
+> S> Good food [mmm] What are the authors' names?
+>
+> U> Heriberto Cuayáhuitl, Seonghan Ryu, Donghyeon Lee, and Jihie Kim
+>
+> S> [mmm] ok, I assume that these names are in the first name followed
+>    by last name format
+>
+> U> Exactly
+>
+> S> Ok, where do you want to add your journal article?
+>
+> U> Put it under reviews.
+> S> Clear. Do you want to add A Study on Dialogue Reward Prediction for
+>    Open-Ended Conversational Agents under reviews folder?
+>
+> U> yes
+>
+> S> I successfully added your item. Do you want anything else?
+>
+> U> No, thank you
+
+#### 3.2.2. Add items using arXiv identifier
+
+```text
+S> Wellcome to the Zotero helper. What would you like to achieve today?
+U> I want to add 1812.00350v1
+S> Good. [aaa] Please wait while retrieving information from the internet.
+S> I have found the requested paper. [aaah] Please select [PAUSE] a destination folder.
+U> No specific folder [PAUSE] Just put it under my library.
+S> Ok. Do you want to add [PAUSE] A Study on Dialogue Reward Prediction for
+   Open-Ended Conversational Agents under your library?
+U> yes
+S> I successfully added your item. Do you want anything else?
+U> No, thank you
+```
+
+#### 3.2.3. Query number of items
+
+```text
+S> Wellcome to the Zotero helper. What would you like to achieve today?
+U> how many items do you have under the reviews folder?
+S> Ok. One moment please. You have three items under reviews folder.
+S> Do you want anything else?
+U> No, thank you
+```
+
+### 3.3. Distillation
 
 text
 
@@ -105,4 +197,9 @@ Hügel, S. (2019). Pyzotero (Version 1.3.15) [Computer software].
 https://doi.org/10.5281/zenodo.2917290
 
 <a id="2">[2]</a>
-Wikimedia REST API. (2021, October 16). MediaWiki, . Retrieved 14:13, December 9, 2021 from https://www.mediawiki.org/w/index.php?title=Wikimedia_REST_API&oldid=4874352.
+Wikimedia REST API. (2021, October 16). MediaWiki, . Retrieved 14:13, December
+9, 2021 from
+https://www.mediawiki.org/w/index.php?title=Wikimedia_REST_API&oldid=4874352.
+
+<a id="3">[3]</a>
+Fraser, N. M., & Gilbert, G. N. (1991). Simulating speech systems. Computer Speech & Language, 5(1), 81–99. https://doi.org/10.1016/0885-2308(91)90019-M
