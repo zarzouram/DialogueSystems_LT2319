@@ -206,8 +206,6 @@
             <condition>
               <proposition predicate="count_int" value="0"/>
             </condition>
-            <!-- If I want the system to report folder name in his answer I
-            will need to more action reports and a nested if statement -->
             <then>
               <invoke_service_action name="ReportEmpty" postconfirm="true"/>
               <forget predicate="folder_name"/>

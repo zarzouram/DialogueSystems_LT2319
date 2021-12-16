@@ -1,26 +1,37 @@
 # Report
 
+**Table of content**
+
 - [1. Introduction](#1-introduction)
 - [2. API](#2-api)
   - [2.1. Pyzotero](#21-pyzotero)
   - [2.2. Wikimedia REST API](#22-wikimedia-rest-api)
 - [3. Data collection](#3-data-collection)
   - [3.1. Scenario](#31-scenario)
-    - [3.1.1. Add items manually](#311-add-items-manually)
-    - [3.1.2. Add items using arXiv identifier](#312-add-items-using-arxiv-identifier)
-    - [3.1.3. Query number of items](#313-query-number-of-items)
+    - [3.1.1. Introduction](#311-introduction)
+    - [3.1.2. Add items manually](#312-add-items-manually)
+    - [3.1.3. Add items using arXiv identifier](#313-add-items-using-arxiv-identifier)
+    - [3.1.4. Query number of items](#314-query-number-of-items)
   - [3.2. Collected material](#32-collected-material)
     - [3.2.1. Add items manually](#321-add-items-manually)
     - [3.2.2. Add items using arXiv identifier](#322-add-items-using-arxiv-identifier)
     - [3.2.3. Query number of items](#323-query-number-of-items)
   - [3.3. Distillation](#33-distillation)
+    - [3.3.1. Introduction](#331-introduction)
+    - [3.3.2. Add items manually](#332-add-items-manually)
+    - [3.3.3. Add items using arXiv identifier](#333-add-items-using-arxiv-identifier)
+    - [3.3.4. Query number of items](#334-query-number-of-items)
+    - [3.3.5. Analysis](#335-analysis)
 - [4. Implementation](#4-implementation)
+  - [4.1. Add items manually](#41-add-items-manually)
+  - [4.2. Add items using arXiv identifier](#42-add-items-using-arxiv-identifier)
+  - [4.3. Item Add Menue based](#43-item-add-menue-based)
+  - [4.4. Query number of items](#44-query-number-of-items)
 - [5. Sample dialogues handled](#5-sample-dialogues-handled)
 - [6. Discussion](#6-discussion)
 - [7. Future work](#7-future-work)
 - [8. Code](#8-code)
-- [9. collected dialogues, distilled dialogues](#9-collected-dialogues-distilled-dialogues)
-- [10. Refrences](#10-refrences)
+- [9. Refrences](#9-refrences)
 
 ---
 
@@ -75,12 +86,14 @@ software role.
 
 ### 3.1. Scenario
 
+#### 3.1.1. Introduction
+
 As discussed in [section 3](#3-data-collection), the data collection will be
 through role play. As [Pyzotero](#21-pyzotero) is the main API, I have set up
 the dialogues scenario based on the methods provided and the data required by
 the API. The planned secnario will as follows:
 
-#### 3.1.1. Add items manually
+#### 3.1.2. Add items manually
 
 The user initiates the required task by expressing their intent to add an item
 manually, i.e., by specifying the information for each item field, such as item
@@ -90,14 +103,14 @@ fields: item type, title, authors, and folder. The specified by the user folder
 may not exist in the database. If this is the case, the program should offer to
 create a new folder for the user and add the item afterward.
 
-#### 3.1.2. Add items using arXiv identifier
+#### 3.1.3. Add items using arXiv identifier
 
 The user initiates the required task by expressing their intent to add an item
 by specifing the arXiv identifier and destination folder. The specified by the
 user folder may not exist in the database. If this is the case, the program
 should offer to create a new folder for the user and add the item afterward.
 
-#### 3.1.3. Query number of items
+#### 3.1.4. Query number of items
 
 The user initiates the required task by requesting the system to count the
 number of items. The user can specify a specific folder or item type or both of
@@ -116,7 +129,7 @@ them.
 >
 > U> journal article
 >
-> S> Good food [mmm] What are the authors' names?
+> S> Good good [mmm] What are the authors' names?
 >
 > U> Heriberto Cuayáhuitl, Seonghan Ryu, Donghyeon Lee, and Jihie Kim
 >
@@ -128,6 +141,7 @@ them.
 > S> Ok, where do you want to add your journal article?
 >
 > U> Put it under reviews.
+>
 > S> Clear. Do you want to add A Study on Dialogue Reward Prediction for
 >    Open-Ended Conversational Agents under reviews folder?
 >
@@ -139,36 +153,258 @@ them.
 
 #### 3.2.2. Add items using arXiv identifier
 
-```text
-S> Wellcome to the Zotero helper. What would you like to achieve today?
-U> I want to add 1812.00350v1
-S> Good. [aaa] Please wait while retrieving information from the internet.
-S> I have found the requested paper. [aaah] Please select [PAUSE] a destination folder.
-U> No specific folder [PAUSE] Just put it under my library.
-S> Ok. Do you want to add [PAUSE] A Study on Dialogue Reward Prediction for
-   Open-Ended Conversational Agents under your library?
-U> yes
-S> I successfully added your item. Do you want anything else?
-U> No, thank you
-```
+> S> Wellcome to the Zotero helper. What would you like to achieve today?
+>
+> U> I want to add 1812.00350v1
+>
+> S> Good. [aaa] Please wait while retrieving information from the internet.\
+> S> I have found the requested paper. [aaah] Please select [PAUSE] a destination folder.
+>
+> U> No specific folder [PAUSE] Just put it under my library.
+>
+> S> Ok. Do you want to add [PAUSE] A Study on Dialogue Reward Prediction for
+>    Open-Ended Conversational Agents under your library?
+>
+> U> yes
+>
+> S> I successfully added your item. Do you want anything else?
+>
+> U> No, thank you
 
 #### 3.2.3. Query number of items
 
-```text
-S> Wellcome to the Zotero helper. What would you like to achieve today?
-U> how many items do you have under the reviews folder?
-S> Ok. One moment please. You have three items under reviews folder.
-S> Do you want anything else?
-U> No, thank you
-```
+> S> Wellcome to the Zotero helper. What would you like to achieve today?
+>
+> U> how many items do you have under the reviews folder?
+>
+> S> Ok. One moment please. You have three items under reviews folder.
+>
+> S> Do you want anything else?
+>
+> U> No, thank you
 
 ### 3.3. Distillation
 
-text
+#### 3.3.1. Introduction
+
+For each `USER-SYSTEM` turns, I will provide a short description about what change. Also,
+generaly speaking, if the system turn has a hesitation or it is syntactically uncorrect it will be
+ﬁxed.
+
+#### 3.3.2. Add items manually
+
+**FUNCTIONALITY:** Setting up a custom `<greeting>` is not straightforward in
+TDM. Thus I changed the custom greeting to the default TDM greeting: `What
+would you like to do?`
+
+> ~~S> Wellcome to the Zotero helper. What would you like to achieve today?~~ \
+>   S> What would you like to do?
+>
+> U> I want to add an item with the title [aaah PAUSE aaa] A Study on Dialogue
+>    Reward Prediction for Open-Ended Conversational Agents.
+
+**RELEVANCE:** Remove unnecessary confirmation
+
+> S> ~~Ok, good [mmm].~~What is the item type?
+>
+> U> journal article
+
+**RELEVANCE:** Remove unnecessary confirmation
+
+> S> ~~Good good [mmm]~~ What are the authors' names?
+>
+> U> Heriberto Cuayáhuitl, Seonghan Ryu, Donghyeon Lee, and Jihie Kim
+
+**FUNCTIONALITY:** I removed this turn; the system will assume that the user's
+formate is `First Name Last Name`. I introduce this removal to simplify the
+implementation of my project. Please see [section 6.
+Discussion](#6-discussion).
+
+> ~~S> [mmm] ok, I assume that these names are in the first name followed
+>    by last name format~~
+>
+> ~~U> Exactly~~
+
+**RELEVANCE:** Remove unnecessary confirmation
+
+> S> ~~Ok, ~~Where do you want to add your journal article?
+>
+> U> Put it under reviews.
+
+No change
+
+> S> Clear. Do you want to add A Study on Dialogue Reward Prediction for
+>    Open-Ended Conversational Agents under reviews folder?
+>
+> U> yes
+
+**FUNCTIONALITY:** TDM will handle questions asked after finishing a task or
+query using its default utterances `Returning to ...` or `what do What would
+you like to do?`
+
+> S> I successfully added your item. ~~Do you want anything else?~~
+>
+> ~~U> No, thank you~~
+
+#### 3.3.3. Add items using arXiv identifier
+
+**FUNCTIONALITY:** Setting up a custom `<greeting>` is not straightforward in
+TDM. Thus I changed the custom greeting to the default TDM greeting: `What
+would you like to do?`
+
+> ~~S> Wellcome to the Zotero helper. What would you like to achieve today?~~ \
+>   S> What would you like to do?
+>
+> U> I want to add 1812.00350v1
+
+**RELEVANCE:** Remove unnecessary confirmation
+
+> S> ~~Good. [aaa]~~ Please wait while retrieving information from the internet.\
+> S> I have found the requested paper. ~~[aaah]~~ Please select ~~[PAUSE]~~ a destination folder.
+>
+> U> No specific folder [PAUSE] Just put it under my library.
+>
+> S> ~~Ok.~~ Do you want to add ~~[PAUSE]~~ A Study on Dialogue Reward Prediction for
+>    Open-Ended Conversational Agents under your library?
+>
+> U> yes
+
+**FUNCTIONALITY:** TDM will handle questions asked after finishing a task or
+query using its default utterances `Returning to ...` or `what do What would
+you like to do?`
+
+> S> I successfully added your item. ~~Do you want anything else?~~
+>
+> ~~U> No, thank you~~
+
+#### 3.3.4. Query number of items
+
+**FUNCTIONALITY:** Setting up a custom `<greeting>` is not straightforward in
+TDM. Thus I changed the custom greeting to the default TDM greeting: `What
+would you like to do?`
+
+> ~~S> Wellcome to the Zotero helper. What would you like to achieve today?~~ \
+>   S> What would you like to do?
+>
+> U> how many items do you have under the reviews folder?
+
+**RELEVANCE:** Remove unnecessary confirmation
+
+> S> ~~Ok.~~ One moment please. You have three items under reviews folder.
+
+**FUNCTIONALITY:** TDM will handle questions asked after finishing a task or
+query using its default utterances `Returning to ...` or `what do What would
+you like to do?`
+> ~~S> Do you want anything else?~~
+>
+> ~~U> No, thank you~~
+
+#### 3.3.5. Analysis
+
+Because the participants try to imitate a software-- not a human-- during the
+role-play, the dialogues after distillation look very similar to the original
+conversation.
 
 ## 4. Implementation
 
-text
+### 4.1. Add items manually
+
+The user can add items manually by initiating the `add_manually` action
+(`<goaltype="perform" action="add_manually">`). The associatted action in the
+service interface is `AddItem`. The user should provide the system
+with the required information to create an item in Zotero. Each piece of
+information has a respective predicate. The system can recognize the following:
+
+1. item type `<predicate name="typetwo" sort="record_type"/>`: Type of the item
+   to be added. The system can recognize the following:
+   - journal article type: `<individual name="journalArticle">`
+   - Webpage type: `<individual name="webpage">`
+   - Conference Paper type: `<individual name="conferencePaper">`
+
+2. item title: `<predicate name="title" sort="item_title_info"/>`.
+
+3. Authors' names: The system can recognize up to three authors in formate of
+   `<First Name> <Last Name>`. A total of six predicates are used; three has
+   sort of `<sort name="first_name" dynamic="true"/>` for the authors first
+   name the other three are of sort of `<sort name="last_name" dynamic="true"/>`
+
+4. Destination folder `<predicate name="folder_name" sort="folder_nm_str"/>`:
+   The name of the folder to which the user wants to add the item.
+
+The system asks about the predicates stated above if the user does not provide
+information about them. Also, the system set other predicates to be used in
+dialogue logic as follows:
+
+1. `<predicate name="folder_id_dist" sort="folder_id_str"/>`: to determine
+   whether the folder specified by the user exists; if not create a new folder
+   with the same name. This predicate is set by
+   `<invoke_service_query predicate="folder_id_dist" type="wh_question"/>`.
+   If the predicate has a value of:
+   - `noid`, then the folder name provided by the user is not found; create a
+     new folder
+   - `0`, **NOT IMPLEMENTED**: There is an option that the user says "use the
+     current folder" so the system can use the folder name that is supposed to
+     be provided in a previous stage. If the value is `0`, then the system does
+     not know the current value for the predicate `folder_id_dist`
+   - Otherwise, the value is the ID `folder_id` of the folder specified by the
+     user.
+
+2. `<predicate name="next_author" sort="authors_info"/>`: to determine whether
+   the user wants to add more authors information. This predicate is set by
+   `<invoke_service_query predicate="next_author" type="wh_question"/>`
+
+I used another predicate for the item title
+`<predicate name="item_title" sort="item_info"/>` to solve a problem that I
+faced. For ore information refer to [Section 6 Discussion](#6-discussion)
+for more information.
+
+### 4.2. Add items using arXiv identifier
+
+The user can add items by providing arXiv identifier by initiating the
+`add_by_identfier` action (`<goaltype="perform" action="add_by_identfier">`).
+The associatted action in the service interface is `AddItem`. The user should
+provide the system with the required information to create an item in Zotero.
+Each piece of information has a respective predicate.  The system can recognize
+the following:
+
+1. arXiv identifier `<predicate name="item_identifier" sort="item_info"/>`
+
+2. Destination folder `<predicate name="folder_name" sort="folder_nm_str"/>`:
+   The name of the folder to which the user wants to add the item.
+
+The system asks about the predicates stated above if the user does not provide
+information about them. When the system knows the identifier, it queries the
+citation information for the provided identifier using
+`<invoke_service_query predicate="cite_info" type="wh_question"/>`. It also,
+set the predicate's value `<predicate name="item_title" sort="item_info"/>`
+with the item title to use it in the action's `AddItem` report and preconfirm.
+The logic of the dialogue related to the destination folder is the same as
+discussed above.
+
+### 4.3. Item Add Menue based
+
+The user can go to the add item menu by initiating the `add_item` action. The
+Systems will ask the user if they want to add an item manually or by providing
+the identifier.
+
+### 4.4. Query number of items
+
+The user can call for a query to count the number of items in the whole
+database or under a specific folder;
+`<goal type="resolve" question_type="wh_question" predicate="count">`
+the logic is as follows:
+
+1. IF the user does not provide the item type, it is assumed the user wants to
+   query about all items, regardless of their type. The respective predicate is
+   `<predicate name="type" sort="record_type"/>`
+
+2. If the user does not provide a folder name, it is assumed the user wants to
+   query the whole database. The respective predicate is
+   `<predicate name="type" sort="folder_name"/>`
+
+I used other predicates like `folder_id`, `count_type`, etc. To workaround some
+issues that I have faced. For more information refer to
+[section 6 Discussion](#6-discussion) for more information.
 
 ## 5. Sample dialogues handled
 
@@ -186,11 +422,7 @@ text
 
 text
 
-## 9. collected dialogues, distilled dialogues
-
-text
-
-## 10. Refrences
+## 9. Refrences
 
 <a id="1">[1]</a>
 Hügel, S. (2019). Pyzotero (Version 1.3.15) [Computer software].
