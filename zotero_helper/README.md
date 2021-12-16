@@ -28,7 +28,16 @@
   - [4.3. Item Add Menue based](#43-item-add-menue-based)
   - [4.4. Query number of items](#44-query-number-of-items)
 - [5. Sample dialogues handled](#5-sample-dialogues-handled)
+  - [5.1. Change topic from manully add to count](#51-change-topic-from-manully-add-to-count)
+  - [5.2. Add by identifier to nonexisting folder](#52-add-by-identifier-to-nonexisting-folder)
+  - [5.3. Count](#53-count)
 - [6. Discussion](#6-discussion)
+  - [6.1. Bugs](#61-bugs)
+  - [6.2. Read Time out](#62-read-time-out)
+  - [6.3. Sub actions](#63-sub-actions)
+  - [6.4. Limitation with TDM Queries](#64-limitation-with-tdm-queries)
+  - [6.5. Building of Custamizable Different Domains](#65-building-of-custamizable-different-domains)
+  - [6.6. Documentaion](#66-documentaion)
 - [7. Future work](#7-future-work)
 - [8. Code](#8-code)
 - [9. Refrences](#9-refrences)
@@ -408,11 +417,77 @@ issues that I have faced. For more information refer to
 
 ## 5. Sample dialogues handled
 
-text
+### 5.1. Change topic from manully add to count
+
+```text
+S> What would you like to do?
+U> add a journal article titled Goal Embedded Dual Hierarchical Model for Task Oriented
+Dialogue Generation by Xianling Lan
+S> What is the second author's first name?
+U> that is it
+S> Select a distination folder?
+U> how many items do you have under Task Oriented
+S> You have 2 records
+U>
+S> Returning to add an item manually. Select a distination folder?
+U> Task oriented
+S> Do you want to add Goal Embedded Dual Hierarchical Model for Task Oriented Dialogue
+Generation to Task oriented
+U> yes
+S> Succssefully added Goal Embedded Dual Hierarchical Model for Task Oriented Dialogue
+Generation
+```
+
+### 5.2. Add by identifier to nonexisting folder
+
+```text
+S> What would you like to do?
+U> add one nine zero seven dot zero zero six eight four v one to my DM folder
+S> Do you want to create DM?
+U> yes
+S> Succssefully created DM
+U>
+S> Do you want to add *
+U> yes
+S> Succssefully added *
+```
+
+### 5.3. Count
+
+```text
+S> What would you like to do?
+U> how many articles do you have under NLU
+S> You do not have any journal articles
+```
 
 ## 6. Discussion
 
+### 6.1. Bugs
+
+text1
+
+### 6.2. Read Time out
+
+text
+
+### 6.3. Sub actions
+
+text
+
+### 6.4. Limitation with TDM Queries
+
+text
+
+### 6.5. Building of Custamizable Different Domains
+
 (focusing on the capabilities of your app in terms of the dialogues it can handle, and problems you have encountered; feature requests and pointing out limitations of the TDM system are very welcome!)
+
+### 6.6. Documentaion
+
+Wrong written things
+Broken links
+Issue with default
+Compelete Example for some vague things
 
 ## 7. Future work
 
