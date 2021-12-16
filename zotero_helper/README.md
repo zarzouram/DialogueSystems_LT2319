@@ -34,10 +34,9 @@
 - [6. Discussion](#6-discussion)
   - [6.1. Bugs](#61-bugs)
   - [6.2. Read Time out](#62-read-time-out)
-  - [6.3. Sub actions](#63-sub-actions)
-  - [6.4. Limitation with TDM Queries](#64-limitation-with-tdm-queries)
-  - [6.5. Building of Custamizable Different Domains](#65-building-of-custamizable-different-domains)
-  - [6.6. Documentaion](#66-documentaion)
+  - [6.3. Limitation with TDM Queries](#63-limitation-with-tdm-queries)
+  - [6.4. Building of Custamizable Different Domains](#64-building-of-custamizable-different-domains)
+  - [6.5. Documentaion](#65-documentaion)
 - [7. Future work](#7-future-work)
 - [8. Code](#8-code)
 - [9. Refrences](#9-refrences)
@@ -344,7 +343,8 @@ The system asks about the predicates stated above if the user does not provide
 information about them. Also, the system set other predicates to be used in
 dialogue logic as follows:
 
-1. `<predicate name="folder_id_dist" sort="folder_id_str"/>`: to determine
+1. <a id="b">Folder logic impelemtation:</a>
+   `<predicate name="folder_id_dist" sort="folder_id_str"/>`: to determine
    whether the folder specified by the user exists; if not create a new folder
    with the same name. This predicate is set by
    `<invoke_service_query predicate="folder_id_dist" type="wh_question"/>`.
@@ -358,7 +358,8 @@ dialogue logic as follows:
    - Otherwise, the value is the ID `folder_id` of the folder specified by the
      user.
 
-2. `<predicate name="next_author" sort="authors_info"/>`: to determine whether
+2. <a id="a">Author logic implemetation:</a>
+   `<predicate name="next_author" sort="authors_info"/>`: to determine whether
    the user wants to add more authors information. This predicate is set by
    `<invoke_service_query predicate="next_author" type="wh_question"/>`
 
@@ -464,25 +465,137 @@ S> You do not have any journal articles
 
 ### 6.1. Bugs
 
-text1
+**Providing Authors name Incrementally**
+
+Below at line 12. the system asks about the first name of the third author. If
+I did not provide the information in a timely matter, the system, instead of
+asking `So, What is the third author's first name?` it goes for the next
+question, "line 14," and it goes for infinite loop repeating the question
+`What is the third author's last name?`.
+
+This bug happen when the system asking for the second authors also. It does not
+happen with the irst question.
+
+```text
+01  S> What would you like to do?
+02  U> add a journal article titled Comprehensive Study How the Context Information
+03  of Different Granularity Affects Dialogue State Tracking to reviews
+04  S> What is the first author's first name?
+05  U> Puhai
+06  S> What is the first author's last name?
+07  U> Yang
+08  S> What is the second author's first name?
+09  U> Heyan
+10  S> What is the second author's last name?
+11  U> Huang
+12  S> What is the third author's first name?
+13  U>
+14  S> What is the third author's last name?
+15  U> Xian-Ling
+16  S> What is the third author's last name?
+```
+
+Below is the code impelemtation for the authors part, for more disscussion about
+logic impelementation go to [Author logic implemetation](#a):
+
+```xml
+<findout type="wh_question" predicate="first_first_name"/>
+<findout type="wh_question" predicate="first_last_name"/>
+<raise type="wh_question" predicate="second_first_name"/>
+<invoke_service_query predicate="next_author" type="wh_question"/>
+<if>
+  <condition>
+    <proposition predicate="next_author" value="next"/>
+  </condition>
+  <then>
+    <forget predicate="next_author"/>
+    <findout type="wh_question" predicate="second_last_name"/>
+    <raise type="wh_question" predicate="third_first_name"/>
+    <invoke_service_query predicate="next_author" type="wh_question"/>
+    <if>
+      <condition>
+        <proposition predicate="next_author" value="next"/>
+      </condition>
+      <then>
+        <findout type="wh_question" predicate="third_last_name"/>
+      </then>
+    </if>
+  </then>
+</if>
+```
+
+**Wrong return after a preconform negation**
+
+At line 10 below, after the user refuses to add an item it seems that the
+system restarts the goal.
+
+```text
+01  S> What would you like to do?
+02  U> add one nine zero nine dot zero nine four eight four v one
+03  S> Select a distination folder?
+04  U> how many items do you have under NLU
+05  S> You do not have any records
+06  U>
+07  S> Returning to add an item by identfier. Select a distination folder?
+08  U> NLU
+09  S> Do you want to add Generative Dialog Policy for Task-oriented Dialog Systems to NLU?
+10  U> no
+11  S> What identifier?
+```
+
+Below is the code impelemtation for the forder part, for more disscussion about
+logic impelementation go to [Folder logic impelemtation](#b):
+
+```xml
+<!-- find destination folder -->
+<findout type="wh_question" predicate="folder_name"/>
+<invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+<if>
+  <condition>
+    <!-- requested folder not found create folder -->
+    <proposition predicate="folder_id_dist" value="noid"/>
+  </condition>
+  <then>
+    <invoke_service_action name="CreateFolder" preconfirm="interrogative"
+    postconfirm="true"/>
+  </then>
+  <else>
+    <invoke_service_action name="AddItem" preconfirm="interrogative" postconfirm="true"/>
+  </else>
+</if>
+```
+
+**Repeatetion of "AddItem" action"**
 
 ### 6.2. Read Time out
+As discussed in [Section 2.2. Wikimedia REST API](#22-wikimedia-rest-api), the
+API is too slow for the TDM. Having a customizable time-out timer could be a
+good solution.
 
-text
+Also, for some reason, when I ran a test for
+[`interaction_tests_eng.txt`](ddds/zotero_helper/zotero_helper/test/interaction_tests_eng.txt),
+I got a couple of run time errors for Zotero API; test 15 and test 16 most of
+the time. In contrast, it seems that the individual test does not return such
+an error. That is why I wrote
+[run_individual_test.sh](./run_individual_test.sh) that loop through all tests
+in the test file and individually test them. The bash script expects the test's
+title to start with a two digits number.
 
-### 6.3. Sub actions
+### 6.3. Limitation with TDM Queries
 
-text
+TDM query cannot return multiple values, i.e. set different predicates. In our
+case when the system knows an item identifier, three predicates value should be
+updated. To overcome this issue, I used an individual query service for each
+predicate to set its value. For full version application at least 23 predicates
+need to be updated.
 
-### 6.4. Limitation with TDM Queries
 
-text
 
-### 6.5. Building of Custamizable Different Domains
+### 6.4. Building of Custamizable Different Domains
 
 (focusing on the capabilities of your app in terms of the dialogues it can handle, and problems you have encountered; feature requests and pointing out limitations of the TDM system are very welcome!)
 
-### 6.6. Documentaion
+### 6.5. Documentaion
 
 Wrong written things
 Broken links
@@ -495,7 +608,7 @@ Compelete Example for some vague things
 
 ## 8. Code
 
-text
+Code can be found [here](./ddds/zotero_helper).
 
 ## 9. Refrences
 
