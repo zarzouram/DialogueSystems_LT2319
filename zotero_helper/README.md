@@ -357,6 +357,9 @@ dialogue logic as follows:
      not know the current value for the predicate `folder_id_dist`
    - Otherwise, the value is the ID `folder_id` of the folder specified by the
      user.
+     See below for logic flowchart
+
+     ![Folder Logic](https://github.com/zarzouram/DialogueSystems_LT2319/blob/main/zotero_helper/images/Add%20Item%20Logic.drawio.svg)
 
 2. <a id="a">Author logic implemetation:</a>
    `<predicate name="next_author" sort="authors_info"/>`: to determine whether
@@ -567,7 +570,10 @@ logic impelementation go to [Folder logic impelemtation](#b):
 
 **Repeatetion of "AddItem" action"**
 
+
+
 ### 6.2. Read Time out
+
 As discussed in [Section 2.2. Wikimedia REST API](#22-wikimedia-rest-api), the
 API is too slow for the TDM. Having a customizable time-out timer could be a
 good solution.
@@ -588,8 +594,6 @@ case when the system knows an item identifier, three predicates value should be
 updated. To overcome this issue, I used an individual query service for each
 predicate to set its value. For full version application at least 23 predicates
 need to be updated.
-
-
 
 ### 6.4. Building of Custamizable Different Domains
 
@@ -614,12 +618,13 @@ Code can be found [here](./ddds/zotero_helper).
 
 <a id="1">[1]</a>
 Hügel, S. (2019). Pyzotero (Version 1.3.15) [Computer software].
-https://doi.org/10.5281/zenodo.2917290
+<https://doi.org/10.5281/zenodo.2917290>
 
 <a id="2">[2]</a>
 Wikimedia REST API. (2021, October 16). MediaWiki, . Retrieved 14:13, December
 9, 2021 from
-https://www.mediawiki.org/w/index.php?title=Wikimedia_REST_API&oldid=4874352.
+<https://www.mediawiki.org/w/index.php?title=Wikimedia_REST_API&oldid=4874352>.
 
 <a id="3">[3]</a>
-Fraser, N. M., & Gilbert, G. N. (1991). Simulating speech systems. Computer Speech & Language, 5(1), 81–99. https://doi.org/10.1016/0885-2308(91)90019-M
+Fraser, N. M., & Gilbert, G. N. (1991). Simulating speech systems. Computer
+Speech & Language, 5(1), 81–99. <https://doi.org/10.1016/0885-2308(91)90019-M>
