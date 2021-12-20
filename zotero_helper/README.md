@@ -343,7 +343,7 @@ The system asks about the predicates stated above if the user does not provide
 information about them. Also, the system set other predicates to be used in
 dialogue logic as follows:
 
-1. <a id="b">Folder logic impelemtation:</a>
+1. <a id="b">**Folder logic impelemtation:**</a>
    `<predicate name="folder_id_dist" sort="folder_id_str"/>`: to determine
    whether the folder specified by the user exists; if not create a new folder
    with the same name. This predicate is set by
@@ -351,17 +351,17 @@ dialogue logic as follows:
    If the predicate has a value of:
    - `noid`, then the folder name provided by the user is not found; create a
      new folder
-   - `0`, **NOT IMPLEMENTED**: There is an option that the user says "use the
-     current folder" so the system can use the folder name that is supposed to
+   - `0`, **NOT IMPLEMENTED**: There is an option that the user says <a id="c">*"use the
+     current folder"*</a> so the system can use the folder name that is supposed to
      be provided in a previous stage. If the value is `0`, then the system does
      not know the current value for the predicate `folder_id_dist`
-   - Otherwise, the value is the ID `folder_id` of the folder specified by the
-     user.
+   - Otherwise, the value is the ID "`folder_id`" of the folder specified by the
+     user.\
      See below for logic flowchart
 
      ![Folder Logic](https://github.com/zarzouram/DialogueSystems_LT2319/blob/main/zotero_helper/images/Add%20Item%20Logic.drawio.svg)
 
-2. <a id="a">Author logic implemetation:</a>
+2. <a id="a">**Author logic implemetation:**</a>
    `<predicate name="next_author" sort="authors_info"/>`: to determine whether
    the user wants to add more authors information. This predicate is set by
    `<invoke_service_query predicate="next_author" type="wh_question"/>`
@@ -383,7 +383,8 @@ the following:
 1. arXiv identifier `<predicate name="item_identifier" sort="item_info"/>`
 
 2. Destination folder `<predicate name="folder_name" sort="folder_nm_str"/>`:
-   The name of the folder to which the user wants to add the item.
+   The name of the folder to which the user wants to add the item. The dialoge
+   logic is the same as disscussed above in [Add items manually](#b)
 
 The system asks about the predicates stated above if the user does not provide
 information about them. When the system knows the identifier, it queries the
@@ -530,7 +531,7 @@ logic impelementation go to [Author logic implemetation](#a):
 **Wrong return after a preconform negation**
 
 At line 10 below, after the user refuses to add an item it seems that the
-system restarts the goal.
+system restarts the goal to perform `add_by_identfier` action.
 
 ```text
 01  S> What would you like to do?
@@ -546,31 +547,89 @@ system restarts the goal.
 11  S> What identifier?
 ```
 
-Below is the code impelemtation for the forder part, for more disscussion about
-logic impelementation go to [Folder logic impelemtation](#b):
+Below is the code impelemtation for the forder part. You can find the code
+[here](https://github.com/zarzouram/DialogueSystems_LT2319/blob/c3ed8dbcfb0cbeced3e198fa33caed6c1fe66664/zotero_helper/ddds/zotero_helper/zotero_helper/domain.xml#L55-L116).For
+more discussion about the dialogue logic go to [Section
+4.2](#42-add-items-using-arxiv-identifier).
+
+**Wrong Repeatetion of "AddItem" action"**
+
+In actions `add_by_identfier`, we have mainly two paths. See [Folder logic
+impelemtation](#b) and the code below:
+  1. path 1: Add the item to a folder, not in the system. Thus, we create the
+     folder first, then add the item.
+  2. path 2: Add an item in an existing folder.
+
+The system seems to stop after the execution of an `invoke_service_action`. No
+further queries or action is executed after these points. See the red mark (1)
+in the flowchart [here](#b). For this reason, I have created a `<postplan>` so
+that the system will add the item after creating the missing folder (path 1).
+The if block in the `<postplan>` should prevent the `AddItem` action's double
+execution if the system is coming from path 2. Unfortunately, the if block does
+not work, i.e., the condition is not checked, and the system executes the code
+within the <then> block in all conditions. Also, if I remove the `ADDItem`
+action from path-2 (so the system executes the `AddItem` action only once,
+i.e., via the `<postplan>`), the system goes into an infinite loop.
+
+If my conclusion is correct, it is preferable to be able to execute multiple
+actions. It could be the case that the system needs to perform sub-actions to
+complete the main action.
+
 
 ```xml
-<!-- find destination folder -->
-<findout type="wh_question" predicate="folder_name"/>
-<invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+<plan>
+  ....
+  <!-- find destination folder -->
+  <findout type="wh_question" predicate="folder_name"/>
+  <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
+  <if>
+    <condition>
+      <!-- requested folder not found create folder -->
+      <proposition predicate="folder_id_dist" value="noid"/>
+    </condition>
+    <then>
+      <invoke_service_query predicate="folder" type="wh_question"/>
+      <invoke_service_action name="CreateFolder" preconfirm="interrogative"
+      postconfirm="true"/>
+      <!-- No code is excuted beyond this point even after if block-->
+    </then>
+    <else>
+      <if>
+        <condition>
+          <!-- current folder is not known by the system ask for the folder
+          **not implemented**-->
+          <proposition predicate="folder_id_dist" value="0"/>
+        </condition>
+        <then>
+          <invoke_service_action name="Dummy" postconfirm="false"/>
+        </then>
+        <else>
+          <invoke_service_query predicate="folder" type="wh_question"/>
+          <invoke_service_action name="AddItem"
+          preconfirm="interrogative" postconfirm="true"/>
+          <!-- No code is excuted beyond this point even after if block-->
+        </else>
+      </if>
+    </else>
+  </if>
+</plan>
+<postplan>
 <if>
   <condition>
-    <!-- requested folder not found create folder -->
-    <proposition predicate="folder_id_dist" value="noid"/>
+  <!-- This if block does not work -->
+    <proposition predicate="folder" value="created"/>
   </condition>
   <then>
-    <invoke_service_action name="CreateFolder" preconfirm="interrogative"
-    postconfirm="true"/>
-  </then>
-  <else>
+    <forget predicate="folder_id_dist"/>
+    <invoke_service_query predicate="folder_id_dist" type="wh_question"/>
     <invoke_service_action name="AddItem" preconfirm="interrogative" postconfirm="true"/>
-  </else>
+  </then>
+  <!-- <else>
+    <invoke_service_action name="Dummy" postconfirm="false"/>
+  </else> -->
 </if>
+</postplan>
 ```
-
-**Repeatetion of "AddItem" action"**
-
-
 
 ### 6.2. Read Time out
 
@@ -591,24 +650,93 @@ title to start with a two digits number.
 
 TDM query cannot return multiple values, i.e. set different predicates. In our
 case when the system knows an item identifier, three predicates value should be
-updated. To overcome this issue, I used an individual query service for each
-predicate to set its value. For full version application at least 23 predicates
-need to be updated.
+updated. Note that for full version application at least 23 predicates need to
+be updated. To overcome this issue, I used an individual query service for each
+predicate to set its value. See further discussion [here](#d).
 
 ### 6.4. Building of Custamizable Different Domains
 
-(focusing on the capabilities of your app in terms of the dialogues it can handle, and problems you have encountered; feature requests and pointing out limitations of the TDM system are very welcome!)
+ِ[[4]](#4) discusses the benefits of the separation of domain-speciﬁc knowledge
+from general dialogue capabilities. While working on my project, I found that
+the separation idea could be extended, as shown below.
+
+**Lingistic domain**
+The system's utterance may contain a `Numeral + Noun` structure. The `Noun`
+could be plurals or singular depending on the `Numeral`. In my implementation,
+to have correct syntactic utterances, I have to have three separate predicates:
+the `Numeral`, the `Noun`, and `Numeral+Noun`. Based on the value of the
+`Numeral` predicate, I change the form of the `Noun` predicate and combine them
+in the third predicate `Numeral+Noun`, to include them in the system
+utterances.
+
+Include such capabilities in a separate domain or the general dialogue
+capabilities domain will reduce the load on the app developer. Other
+considerations could be the indefinite articles, plurals, singular verbs, etc.
+Also, it is possible to switch between languages with minimum changing.
+
+<a id="d">**Dialogue Implications Domain**</a>
+
+As discussed in [Section 6.3 Limitation with TDM
+Queries](#63-limitation-with-tdm-queries), The system may change multiple
+predicates depending on information received from the user. It is possible to
+have a separate domain where the developer defines the rules that manage the
+changes in predicates. This domain could be implemented as an extension to the
+`ontology` part.
+
+**Common Sense or Common Knowledge Domain**
+
+Some functions are common knowledge like:
+
+  - adding an item: the added item is new and does not exist. If it exists, ask
+    for the correct information. I do not check for such a condition to
+    simplify my implementation.
+  - some user-provided information must be unique, like citation key and folder
+    name.
+  - searching for something under a folder; the folder must exist; otherwise
+    asks for the correct information
+  - user-provided information should be consistent; for example, the authors
+    for a cerian title must be correct. Most probably, the user is wrong with
+    the authors, provide them with the right authors for confirmation or wait
+    for another instruction from the user like correcting the title.
+
+There are many others rules that the user unintentionally considers when
+dealing with a database manager. These rules could be categorized depending on
+the field type and the task being performed, i.e., query about cite key and
+create a new citation key. The few rules stated above can complicate the
+implementation, especially using markup language like XML.
 
 ### 6.5. Documentaion
 
-Wrong written things
-Broken links
-Issue with default
-Compelete Example for some vague things
+Issues that I faced during dealing with the documentation are listed here:
+
+  - Under the Service Interface/Children/Parameters, there is an attribute
+    called
+    [Default](https://docs.talkamatic.se/dialog-domain-description-definition/service_interface/children/parameters/#default-attribute).
+    However, the system does not accept this attribute and gives a "not allowed
+    here" error.
+
+  - the difinition of Invoke Service Action is written wrong it should be
+    `<invoke_service_action name="alpha">` (with underscore) instead of
+    `<invoke-service-action name="alpha">`. Here is the
+    [link](https://docs.talkamatic.se/dialog-domain-description-definition/domain/children/invoke_service_action/).
+
+  - Broken links:
+    - `<forget>`, under the Children list in the Domain->Plan page. Here is the [link](https://docs.talkamatic.se/dialog-domain-description-definition/domain/children/forget).
+
+    - `<jumpto>`, at the same place above. Here is the [link](https://docs.talkamatic.se/dialog-domain-description-definition/domain/children/jumpto).
+
+  - The last two items are missing in the same list stated above
 
 ## 7. Future work
 
-(that could improve the system)
+- A useful feature could be adding notes to items using google assistance or Siri.
+
+- Extend the project to have other functions like searching for items using any fields.
+
+- Build a multimodal menu and sun menu, including help function.
+
+- Add other features like find similar papers using additional API like
+  [Connected Paper](https://www.connectedpapers.com).
 
 ## 8. Code
 
@@ -628,3 +756,6 @@ Wikimedia REST API. (2021, October 16). MediaWiki, . Retrieved 14:13, December
 <a id="3">[3]</a>
 Fraser, N. M., & Gilbert, G. N. (1991). Simulating speech systems. Computer
 Speech & Language, 5(1), 81–99. <https://doi.org/10.1016/0885-2308(91)90019-M>
+
+<a id="4">[4]</a>
+Larsson, S., & Berman, A. (2016). Domain-specific and General Syntax and Semantics in the Talkamatic Dialogue Manager. Empirical Issues in Syntax and Semantics, 11, 91–110.
